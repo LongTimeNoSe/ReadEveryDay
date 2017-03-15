@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by Werb on 2016/9/2.
- * Werb is Wanbo.
- * Contact Me : werbhelius@gmail.com
+ * Created by XuYanping on 2017/3/15.
  */
 public class Daily implements Serializable {
 

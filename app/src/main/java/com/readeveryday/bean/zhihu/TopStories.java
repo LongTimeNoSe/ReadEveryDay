@@ -3,9 +3,7 @@ package com.readeveryday.bean.zhihu;
 import java.io.Serializable;
 
 /**
- * Created by Werb on 2016/8/18.
- * Werb is Wanbo.
- * Contact Me : werbhelius@gmail.com
+ * Created by XuYanping on 2017/3/15.
  */
 public class TopStories implements Serializable {
 

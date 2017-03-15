@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Werb on 2016/8/19.
- * Werb is Wanbo.
- * Contact Me : werbhelius@gmail.com
+ * Created by XuYanping on 2017/3/15.
  */
 public class GankData {
 
