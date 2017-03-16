@@ -73,8 +73,9 @@ public class ZhiHuFgPreshenter extends BasePresenter<ZhiHuFgView> {
                 mAdapter.updateLoadStatus(mAdapter.LOAD_NONE);
                 view.setDataRefresh(false);
                 return;
+            }else{
+                mTimeLine.getStories().addAll(line.getStories());
             }
-            mTimeLine.getStories().addAll(line.getStories());
             mAdapter.notifyDataSetChanged();
         } else {
             mTimeLine = line;
