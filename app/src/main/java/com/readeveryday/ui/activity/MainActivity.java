@@ -2,8 +2,8 @@ package com.readeveryday.ui.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 
 import com.readeveryday.R;
@@ -31,6 +31,8 @@ public class MainActivity extends BaseActivity {
     ViewPager mContentViewPager;
 
     List<BaseFragment> mFragmentList;
+    @BindView(R.id.activity_main)
+    DrawerLayout mActivityMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,5 +63,10 @@ public class MainActivity extends BaseActivity {
         mContentViewPager.setOffscreenPageLimit(3);//设置至少3个fragment，防止重复创建和销毁，造成内存溢出
         mContentViewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), mFragmentList, "main_view_pager"));
         mTabLayout.setupWithViewPager(mContentViewPager);
+    }
+
+    @Override
+    protected DrawerLayout createDrawerLayoutId() {
+        return mActivityMain;
     }
 }

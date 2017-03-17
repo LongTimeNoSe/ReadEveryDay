@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.util.TypedValue;
 import android.view.MenuItem;
 
 import com.readeveryday.R;
+import com.readeveryday.utils.StatusBarUtil;
 
 import butterknife.ButterKnife;
 
@@ -22,6 +24,7 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
 
     protected T mPresenter;
+    protected DrawerLayout mDrawerLayout;
     protected AppBarLayout mAppBar;
     protected Toolbar mToolbar;
     private SwipeRefreshLayout mRefreshLayout;
@@ -37,6 +40,10 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         }
         setContentView(createViewLayoutId());
         ButterKnife.bind(this);
+        if (createDrawerLayoutId() != null) {
+            mDrawerLayout = createDrawerLayoutId();
+//            StatusBarUtil.setColorNoTranslucentForDrawerLayout(this, mDrawerLayout, getResources().getColor(R.color.colorPrimary));
+        }
         mAppBar = (AppBarLayout) findViewById(R.id.app_bar_layout);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         if (mToolbar != null && mAppBar != null) {
@@ -135,4 +142,6 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
 
     //绑定子Activity的布局文件
     protected abstract int createViewLayoutId();
+
+    protected abstract DrawerLayout createDrawerLayoutId();
 }

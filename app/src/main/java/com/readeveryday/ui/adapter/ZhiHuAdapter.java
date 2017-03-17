@@ -1,10 +1,12 @@
 package com.readeveryday.ui.adapter;
 
 import android.content.Context;
+import android.support.v4.hardware.display.DisplayManagerCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -173,6 +175,8 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ScreenUtil screenUtil = ScreenUtil.instance(context);
             int screenWidth = screenUtil.getScreenWidth();
             mCvItem.setLayoutParams(new LinearLayout.LayoutParams(screenWidth, LinearLayout.LayoutParams.WRAP_CONTENT));
+            int screenWidthTwo = context.getResources().getDisplayMetrics().widthPixels;
+            mCvItem.setLayoutParams(new LinearLayout.LayoutParams(screenWidthTwo, LinearLayout.LayoutParams.WRAP_CONTENT));
         }
 
         public void bindView(Stories stories) {
