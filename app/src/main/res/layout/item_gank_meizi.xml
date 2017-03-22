@@ -29,7 +29,8 @@
             android:maxLines="2"
             android:ellipsize="end"
             android:padding="10dp"
-            android:textColor="@color/top_content_text"/>
+            android:visibility="gone"
+            android:textColor="@color/top_title"/>
 
     </LinearLayout>
 

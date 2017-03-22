@@ -116,7 +116,6 @@ public class GankPresenter extends BasePresenter<GankFgView> {
         if (isLoadMore) {
             if (meiZhiList == null) {
                 gankFgView.setDataRefresh(false);
-                return;
             } else {
                 mList.addAll(meiZhiList);
             }

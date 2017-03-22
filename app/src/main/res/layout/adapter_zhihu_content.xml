@@ -28,7 +28,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:padding="2dp"
-                android:textColor="@color/top_content_text"
+                android:textColor="@color/top_title"
                 android:gravity="center_vertical"/>
 
             <ImageView

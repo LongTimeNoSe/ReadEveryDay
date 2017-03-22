@@ -1,5 +1,6 @@
 package com.readeveryday.ui.base;
 
+import com.readeveryday.api.AndroidApi;
 import com.readeveryday.api.ApiFactory;
 import com.readeveryday.api.DailyApi;
 import com.readeveryday.api.GankApi;
@@ -19,6 +20,7 @@ public abstract class BasePresenter<V> {
     public static final ZhiHuApi zhihuApi = ApiFactory.getZhiHuSingleton();
     public static final GankApi gankApi = ApiFactory.getGankSingleton();
     public static final DailyApi dailyApi = ApiFactory.getDailySingleton();
+    public static final AndroidApi androidApi = ApiFactory.getAndroidSingleton();
 
     //附加View (弱引用)
     public void attachView(V view) {
@@ -31,6 +33,10 @@ public abstract class BasePresenter<V> {
 
     public boolean isViewAttached() {
         return (mReference != null) && mReference.get() != null;
+    }
+
+    public String setTitle() {
+        return null;
     }
 
     //分离View

@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.readeveryday.R;
 import com.readeveryday.ui.base.BaseFragment;
-import com.readeveryday.ui.presenter.ZhiHuFgPreshenter;
+import com.readeveryday.ui.presenter.ZhiHuFgPresenter;
 import com.readeveryday.ui.view.ZhiHuFgView;
 
 import butterknife.BindView;
@@ -17,35 +17,20 @@ import butterknife.BindView;
  * Created by XuYanping on 2017/3/15.
  */
 
-public class ZhiHuFragment extends BaseFragment<ZhiHuFgView, ZhiHuFgPreshenter> implements ZhiHuFgView {
+public class ZhiHuFragment extends BaseFragment<ZhiHuFgView, ZhiHuFgPresenter> implements ZhiHuFgView {
     @BindView(R.id.content_list)
     RecyclerView mContentList;
 
     private LinearLayoutManager mLayoutManager;
 
     @Override
-    protected ZhiHuFgPreshenter createPresenter() {
-        return new ZhiHuFgPreshenter(getContext());
+    protected ZhiHuFgPresenter createPresenter() {
+        return new ZhiHuFgPresenter(getContext());
     }
 
     @Override
     protected int createViewLayoutId() {
         return R.layout.fragment_zhihu;
-    }
-
-    @Override
-    public void setDataRefresh(Boolean refresh) {
-        setRefresh(refresh);
-    }
-
-    @Override
-    public RecyclerView getRecyclerView() {
-        return mContentList;
-    }
-
-    @Override
-    public LinearLayoutManager getLayoutManager() {
-        return mLayoutManager;
     }
 
     @Override
@@ -68,4 +53,21 @@ public class ZhiHuFragment extends BaseFragment<ZhiHuFgView, ZhiHuFgPreshenter> 
         setDataRefresh(true);
         mPresenter.getLatesNews();
     }
+
+    @Override
+    public void setDataRefresh(Boolean refresh) {
+        setRefresh(refresh);
+    }
+
+    @Override
+    public RecyclerView getRecyclerView() {
+        return mContentList;
+    }
+
+    @Override
+    public LinearLayoutManager getLayoutManager() {
+        return mLayoutManager;
+    }
+
+
 }

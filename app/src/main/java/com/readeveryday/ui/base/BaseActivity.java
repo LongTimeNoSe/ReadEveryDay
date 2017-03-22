@@ -24,8 +24,6 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
 
     protected T mPresenter;
-    protected DrawerLayout mDrawerLayout;
-    protected AppBarLayout mAppBar;
     protected Toolbar mToolbar;
     private SwipeRefreshLayout mRefreshLayout;
     private boolean mIsRequestDataRefresh = false;
@@ -40,23 +38,18 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         }
         setContentView(createViewLayoutId());
         ButterKnife.bind(this);
-        if (createDrawerLayoutId() != null) {
-            mDrawerLayout = createDrawerLayoutId();
-//            StatusBarUtil.setColorNoTranslucentForDrawerLayout(this, mDrawerLayout, getResources().getColor(R.color.colorPrimary));
+        if (getToolbar() != null) {
+            mToolbar = (Toolbar) findViewById(R.id.toolbar);
         }
-        mAppBar = (AppBarLayout) findViewById(R.id.app_bar_layout);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (mToolbar != null && mAppBar != null) {
+        if (mToolbar != null) {
             setSupportActionBar(mToolbar); //把Toolbar当做ActionBar给设置
             if (canBack()) {
                 ActionBar actionBar = getSupportActionBar();
                 if (actionBar != null)
                     actionBar.setDisplayHomeAsUpEnabled(true);//设置ActionBar一个返回箭头，主界面没有，次级界面有
             }
-            if (Build.VERSION.SDK_INT >= 21) {
-                mAppBar.setElevation(10.6f);//Z轴浮动
-            }
         }
+        setStatusBar();
     }
 
     public void setupSwipeRefresh() {
@@ -143,5 +136,10 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     //绑定子Activity的布局文件
     protected abstract int createViewLayoutId();
 
-    protected abstract DrawerLayout createDrawerLayoutId();
+    protected void setStatusBar() {
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
+    }
+
+    protected abstract Toolbar getToolbar();
+
 }

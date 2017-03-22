@@ -21,9 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:background="@color/main_pager_title_bg"
             android:gravity="center_vertical"
             android:padding="5dp"
-            android:textColor="@color/top_title"
+            android:textColor="@color/color_ffffff"
             android:textStyle="bold"/>
 
     </RelativeLayout>

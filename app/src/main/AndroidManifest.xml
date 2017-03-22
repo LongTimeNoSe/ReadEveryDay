@@ -3,7 +3,7 @@
           package="com.readeveryday">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <!--检查网络状态-->
+    <!-- 检查网络状态 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
@@ -23,6 +23,10 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".ui.activity.AndroidDetailActivity">
+        </activity>
+        <activity android:name=".ui.activity.ZhiHuDetailActivity">
         </activity>
     </application>
 

@@ -3,6 +3,7 @@ package com.readeveryday.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -11,8 +12,10 @@ import android.widget.TextView;
 import com.readeveryday.R;
 import com.readeveryday.ui.base.BaseActivity;
 import com.readeveryday.ui.base.BasePresenter;
+import com.readeveryday.utils.StatusBarUtil;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class WelcomeActivity extends BaseActivity {
 
@@ -37,11 +40,6 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     protected int createViewLayoutId() {
         return R.layout.activity_welcome;
-    }
-
-    @Override
-    protected DrawerLayout createDrawerLayoutId() {
-        return null;
     }
 
     private void startAnimation() {
@@ -105,5 +103,23 @@ public class WelcomeActivity extends BaseActivity {
         mTvFirst.setVisibility(View.VISIBLE);
         mTvFirst.setAnimation(anim_1);
 
+    }
+
+    @Override
+    protected void setStatusBar() {
+        super.setStatusBar();
+        StatusBarUtil.setTransparent(this);
+    }
+
+    @Override
+    protected Toolbar getToolbar() {
+        return null;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

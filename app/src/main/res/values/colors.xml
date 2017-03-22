@@ -4,7 +4,19 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="top_title">#512e2e2e</color>
-    <color name="top_content_text">#525252</color>
+    <color name="main_background">#eeeeee</color>
+
+    <color name="top_content_text">#512e2e2e</color>
+    <color name="top_title">#525252</color>
+
+    <!--水波纹或5.0以下选择器颜色-->
+    <color name="tabBackground">#777D7D7D</color>
+
+    <color name="main_pager_title_bg">#512e2e2e</color>
+
+    <color name="color_ffffff">#ffffff</color>
+
+    <color name="color_000000">#d0000000</color>
+
 
 </resources>

@@ -26,9 +26,11 @@ public class ApiRetrofit {
     public ZhiHuApi ZhuHuApiServer;
     public GankApi GankApiServer;
     public DailyApi DailyApiServer;
+    public AndroidApi AndroidApiServer;
 
     public static final String ZHIHU_BASE_URL = "http://news-at.zhihu.com/api/4/";
     public static final String GANK_BASE_URL = "http://gank.io/api/";
+    public static final String ANDROID_BASE_URL = "http://gank.io/api/data/Android/10/";
     public static final String DAILY_BASE_URL = "http://app3.qdaily.com/app3/";
 
     public ZhiHuApi getZhuHuApiServer() {
@@ -43,6 +45,10 @@ public class ApiRetrofit {
         return DailyApiServer;
     }
 
+    public AndroidApi getAndroidApiServer() {
+        return AndroidApiServer;
+    }
+
     public ApiRetrofit() {
 
         File httpCacheDirectory = new File(MyApplication.mContext.getCacheDir(), "dataResponse");
@@ -53,12 +59,13 @@ public class ApiRetrofit {
 
         Retrofit retrofit_zhihu = new Retrofit.Builder().baseUrl(ZHIHU_BASE_URL).client(client).addCallAdapterFactory(RxJavaCallAdapterFactory.create()).addConverterFactory(GsonConverterFactory.create()).build();
         Retrofit retrofit_gank = new Retrofit.Builder().baseUrl(GANK_BASE_URL).client(client).addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
-
         Retrofit retrofit_daily = new Retrofit.Builder().baseUrl(DAILY_BASE_URL).client(client).addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
+        Retrofit retrofit_android = new Retrofit.Builder().baseUrl(ANDROID_BASE_URL).client(client).addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
 
         ZhuHuApiServer = retrofit_zhihu.create(ZhiHuApi.class);
         GankApiServer = retrofit_gank.create(GankApi.class);
         DailyApiServer = retrofit_daily.create(DailyApi.class);
+        AndroidApiServer = retrofit_android.create(AndroidApi.class);
 
     }
 

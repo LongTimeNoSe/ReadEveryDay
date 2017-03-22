@@ -38,7 +38,7 @@ public class GankData {
         @Override
         public String toString() {
             return "Result{" +
-                    "Android=" + Android +
+                    "AndroidView=" + Android +
                     ", iOS=" + iOS +
                     ", 休息视频=" + 休息视频 +
                     ", 前端=" + 前端 +

@@ -10,6 +10,7 @@ public class ApiFactory {
     static ZhiHuApi ZhiHuSingleton = null;
     static GankApi GankSingleton = null;
     static DailyApi DailySingleton = null;
+    static AndroidApi androidSingleton = null;
 
     public static ZhiHuApi getZhiHuSingleton() {
 
@@ -37,5 +38,14 @@ public class ApiFactory {
             }
             return DailySingleton;
         }
+    }
+
+    public static AndroidApi getAndroidSingleton() {
+        synchronized (monitor){
+            if (androidSingleton == null){
+                androidSingleton = new ApiRetrofit().getAndroidApiServer();
+            }
+        }
+        return androidSingleton;
     }
 }

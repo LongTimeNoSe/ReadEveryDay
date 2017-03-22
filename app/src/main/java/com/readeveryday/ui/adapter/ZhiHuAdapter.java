@@ -1,6 +1,7 @@
 package com.readeveryday.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.hardware.display.DisplayManagerCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
@@ -20,9 +21,11 @@ import com.readeveryday.R;
 import com.readeveryday.bean.zhihu.NewsTimeLine;
 import com.readeveryday.bean.zhihu.Stories;
 import com.readeveryday.bean.zhihu.TopStories;
+import com.readeveryday.ui.activity.ZhiHuDetailActivity;
 import com.readeveryday.utils.PromptUtil;
 import com.readeveryday.utils.ScreenUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -116,8 +119,34 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ButterKnife.bind(this, itemView);
         }
 
-        public void bindView(List<TopStories> stories) {
+        public void bindView(final List<TopStories> stories) {
 
+            List<ImageView> imageViewList = new ArrayList<ImageView>();
+            for (int i = 0; i < stories.size(); i++) {
+                ImageView imageView = new ImageView(context);
+                ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                imageView.setLayoutParams(layoutParams);
+                Glide.with(context).load(stories.get(i).getImage()).centerCrop().into(imageView);
+                imageViewList.add(imageView);
+            }
+            mVpTopStories.setAdapter(new ZhiHuViewPagerAdapter(imageViewList));
+            mTvTopTitle.setText(stories.get(0).getTitle());
+            mVpTopStories.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+                    mTvTopTitle.setText(stories.get(position).getTitle());
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+
+                }
+            });
         }
     }
 
@@ -175,11 +204,11 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ScreenUtil screenUtil = ScreenUtil.instance(context);
             int screenWidth = screenUtil.getScreenWidth();
             mCvItem.setLayoutParams(new LinearLayout.LayoutParams(screenWidth, LinearLayout.LayoutParams.WRAP_CONTENT));
-            int screenWidthTwo = context.getResources().getDisplayMetrics().widthPixels;
-            mCvItem.setLayoutParams(new LinearLayout.LayoutParams(screenWidthTwo, LinearLayout.LayoutParams.WRAP_CONTENT));
+//            int screenWidthTwo = context.getResources().getDisplayMetrics().widthPixels;
+//            mCvItem.setLayoutParams(new LinearLayout.LayoutParams(screenWidthTwo, LinearLayout.LayoutParams.WRAP_CONTENT));
         }
 
-        public void bindView(Stories stories) {
+        public void bindView(final Stories stories) {
 
             String[] images = stories.getImages();
             Glide.with(context).load(images[0]).centerCrop().into(mIvStoriesImg);
@@ -187,7 +216,12 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             mCvItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    PromptUtil.toastShowShort(context, "点击");
+
+                    Intent intent = new Intent(context, ZhiHuDetailActivity.class);
+
+                    intent.putExtra("newsId", stories.getId());
+
+                    context.startActivity(intent);
                 }
             });
 
