@@ -38,7 +38,7 @@ import butterknife.ButterKnife;
 public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
-    private Context context;
+    private Context mContext;
     private NewsTimeLine newsTimeLine;
     private int status = 1;
     public static final int LOAD_MORE = 0;
@@ -49,7 +49,7 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private static final int TYPE_FOOTER = -2;
 
     public ZhiHuAdapter(Context context, NewsTimeLine newsTimeLine) {
-        this.context = context;
+        this.mContext = context;
         this.newsTimeLine = newsTimeLine;
     }
 
@@ -123,10 +123,19 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             List<ImageView> imageViewList = new ArrayList<ImageView>();
             for (int i = 0; i < stories.size(); i++) {
-                ImageView imageView = new ImageView(context);
+                ImageView imageView = new ImageView(mContext);
                 ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 imageView.setLayoutParams(layoutParams);
-                Glide.with(context).load(stories.get(i).getImage()).centerCrop().into(imageView);
+                Glide.with(mContext).load(stories.get(i).getImage()).centerCrop().into(imageView);
+                final int finalI = i;
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mContext, ZhiHuDetailActivity.class);
+                        intent.putExtra("newsId", stories.get(finalI).getId());
+                        mContext.startActivity(intent);
+                    }
+                });
                 imageViewList.add(imageView);
             }
             mVpTopStories.setAdapter(new ZhiHuViewPagerAdapter(imageViewList));
@@ -160,7 +169,7 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         public FooterViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            LinearLayoutCompat.LayoutParams params = new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtil.instance(context).dip2px(40));
+            LinearLayoutCompat.LayoutParams params = new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtil.instance(mContext).dip2px(40));
             itemView.setLayoutParams(params);
         }
 
@@ -201,7 +210,7 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         public ContentViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            ScreenUtil screenUtil = ScreenUtil.instance(context);
+            ScreenUtil screenUtil = ScreenUtil.instance(mContext);
             int screenWidth = screenUtil.getScreenWidth();
             mCvItem.setLayoutParams(new LinearLayout.LayoutParams(screenWidth, LinearLayout.LayoutParams.WRAP_CONTENT));
 //            int screenWidthTwo = context.getResources().getDisplayMetrics().widthPixels;
@@ -211,17 +220,17 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         public void bindView(final Stories stories) {
 
             String[] images = stories.getImages();
-            Glide.with(context).load(images[0]).centerCrop().into(mIvStoriesImg);
+            Glide.with(mContext).load(images[0]).centerCrop().into(mIvStoriesImg);
             mTvStoriesTitle.setText(stories.getTitle());
             mCvItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent = new Intent(context, ZhiHuDetailActivity.class);
+                    Intent intent = new Intent(mContext, ZhiHuDetailActivity.class);
 
                     intent.putExtra("newsId", stories.getId());
 
-                    context.startActivity(intent);
+                    mContext.startActivity(intent);
                 }
             });
 

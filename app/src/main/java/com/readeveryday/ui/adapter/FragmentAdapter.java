@@ -44,7 +44,7 @@ public class FragmentAdapter extends FragmentPagerAdapter {
                     return "ZhiHu";
                 case 1:
 //                    return "Gank";
-                    return "Beauty";
+                    return "MeiZhi";
                 case 2:
                     return "Android";
             }

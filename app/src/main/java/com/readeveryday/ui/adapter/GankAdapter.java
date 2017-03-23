@@ -14,6 +14,8 @@ import com.readeveryday.R;
 import com.readeveryday.bean.gank.Gank;
 import com.readeveryday.utils.PromptUtil;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -92,4 +94,5 @@ public class GankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             });
         }
     }
+
 }
