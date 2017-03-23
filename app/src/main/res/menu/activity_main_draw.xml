@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/menu_home"
+            android:title="首页"/>
+
+        <item
+            android:id="@+id/nav_menu"
+            android:icon="@drawable/menu_collection"
+            android:title="收藏"/>
+
+    </group>
+
+    <item
+        android:title="关于">
+
+        <menu>
+
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/menu_about_me"
+                android:title="关于我"/>
+
+            <item
+                android:id="@+id/nav_contact_me"
+                android:icon="@drawable/menu_about_project"
+                android:title="关于ReadEveryDay"/>
+
+
+        </menu>
+
+    </item>
+
+</menu>

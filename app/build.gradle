@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 25
@@ -16,6 +17,17 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    /**
+     *  schemaVersion--> 指定数据库schema版本号，迁移等操作会用到;
+     daoPackage --> dao的包名，包名默认是entity所在的包；
+     targetGenDir --> 生成数据库文件的目录;
+     */
+    greendao {
+        schemaVersion 1
+        daoPackage 'com.readeveryday.greendao'
+        targetGenDir 'src/main/java'
     }
 }
 
@@ -44,4 +56,6 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     //Loading Animator
     compile project(':library')
+    //greenDao 数据库
+    compile 'org.greenrobot:greendao:3.2.0'
 }
