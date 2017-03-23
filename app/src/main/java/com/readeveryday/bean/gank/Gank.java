@@ -36,6 +36,16 @@ public class Gank implements Serializable {
     private Date updatedAt;
     private Date publishedAt;
 
+    public boolean isCollected() {
+        return isCollected;
+    }
+
+    public void setCollected(boolean collected) {
+        isCollected = collected;
+    }
+
+    private boolean isCollected;
+
     public String getUrl() {
         return url;
     }
