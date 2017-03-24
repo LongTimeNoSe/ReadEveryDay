@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.readeveryday.MyApplication;
 import com.readeveryday.R;
 import com.readeveryday.bean.gank.Gank;
-import com.readeveryday.greendao.MeiZhiCollection;
-import com.readeveryday.greendao.MeiZhiCollectionDao;
+import com.readeveryday.greendao.MyCollect;
+import com.readeveryday.greendao.MyCollectDao;
 import com.readeveryday.manager.GreenDaoManager;
 import com.readeveryday.ui.activity.MeiZhiDetailActivity;
-import com.readeveryday.utils.PromptUtil;
+import com.readeveryday.Constants;
 
 import java.util.List;
 
@@ -34,13 +32,13 @@ public class MeiZhiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private Context mContext;
     private List<Gank> mList;
-    private MeiZhiCollectionDao mDao;
-    private MeiZhiCollection mMeiZhiCollection;
+    private MyCollectDao mDao;
+    private MyCollect mMyCollect;
 
     public MeiZhiAdapter(Context context, List<Gank> list) {
         mContext = context;
         mList = list;
-        mDao = GreenDaoManager.getGreenDaoManager(mContext).getDaoSession().getMeiZhiCollectionDao();
+        mDao = GreenDaoManager.getGreenDaoManager(mContext).getDaoSession().getMyCollectDao();
     }
 
     @Override
@@ -89,24 +87,23 @@ public class MeiZhiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     mContext.startActivity(intent);
                 }
             });
-
-            if (queryMeiZhi(position) != null && queryMeiZhi(position).size() > 0) {
+            if (queryMeiZhi(mList.get(position).getDesc()) != null && queryMeiZhi(mList.get(position).getDesc()).size() > 0) {
                 mCollection.setImageResource(R.drawable.collected);
                 mList.get(position).setCollected(true);
             } else {
+                mList.get(position).setCollected(false);
                 mCollection.setImageResource(R.drawable.collection);
             }
+
             mCollection.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mList.get(position).isCollected()) {
                         deleteMeiZhi(position);
-                        queryMeiZhi(position);
                         mCollection.setImageResource(R.drawable.collection);
                         mList.get(position).setCollected(false);
                     } else {
                         insertMeiZhi(position);
-                        queryMeiZhi(position);
                         mCollection.setImageResource(R.drawable.collected);
                         mList.get(position).setCollected(true);
                     }
@@ -117,31 +114,30 @@ public class MeiZhiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     //数据库增加
     public void insertMeiZhi(int position) {
-        mMeiZhiCollection = new MeiZhiCollection((long) position, mList.get(position).getUrl(), mList.get(position).getDesc());
-        mDao.insertOrReplace(mMeiZhiCollection);
+        mMyCollect = new MyCollect(mList.get(position).getUrl(), mList.get(position).getDesc(), "", "", "", Constants.FROMMEIZHI);
+        mDao.insert(mMyCollect);
     }
 
     //数据库查询
-    public List<MeiZhiCollection> queryMeiZhi(int position) {
-        List<MeiZhiCollection> list = mDao.queryBuilder().where(MeiZhiCollectionDao.Properties.ImageDesc.eq(mList.get(position).getDesc())).build().list();
-        Log.d("query", list.toString());
+    public List<MyCollect> queryMeiZhi(String desc) {
+        List<MyCollect> list = mDao.queryBuilder().where(MyCollectDao.Properties.MeiZhiImageDesc.eq(desc)).build().list();
         return list;
     }
 
     //数据库删除
     public void deleteMeiZhi(int position) {
-        List<MeiZhiCollection> list = mDao.queryBuilder().where(MeiZhiCollectionDao.Properties.ImageDesc.eq(mList.get(position).getDesc())).build().list();
-        for (MeiZhiCollection item : list) {
+        List<MyCollect> list = mDao.queryBuilder().where(MyCollectDao.Properties.MeiZhiImageDesc.eq(mList.get(position).getDesc())).build().list();
+        for (MyCollect item : list) {
             mDao.delete(item);
         }
     }
 
     //数据库更改
     public void updateMeiZhi(String imageDesc, String newImageDesc, String newImageUrl) {
-        List<MeiZhiCollection> list = mDao.queryBuilder().where(MeiZhiCollectionDao.Properties.ImageDesc.eq(imageDesc)).build().list();
-        for (MeiZhiCollection item : list) {
-            item.setImageDesc(newImageDesc);
-            item.setImageUrl(newImageUrl);
+        List<MyCollect> list = mDao.queryBuilder().where(MyCollectDao.Properties.MeiZhiImageDesc.eq(imageDesc)).build().list();
+        for (MyCollect item : list) {
+            item.setMeiZhiImageDesc(newImageDesc);
+            item.setMeiZhiImageUrl(newImageUrl);
             mDao.update(item);
         }
     }

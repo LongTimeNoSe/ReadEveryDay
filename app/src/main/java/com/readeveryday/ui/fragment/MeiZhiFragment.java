@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.readeveryday.R;
 import com.readeveryday.manager.CardLayoutManager;
 import com.readeveryday.ui.base.BaseFragment;
-import com.readeveryday.ui.presenter.BeautyPresenter;
+import com.readeveryday.ui.presenter.MeiZhiPresenter;
 import com.readeveryday.ui.view.MeiZhiView;
 
 import butterknife.BindView;
@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
  * Created by XuYanping on 2017/3/20.
  */
 
-public class MeiZhiFragment extends BaseFragment<MeiZhiView, BeautyPresenter> implements MeiZhiView {
+public class MeiZhiFragment extends BaseFragment<MeiZhiView, MeiZhiPresenter> implements MeiZhiView {
     @BindView(R.id.rv_beauty)
     RecyclerView mRvBeauty;
     @BindView(R.id.bt_beauty_next)
@@ -34,8 +34,8 @@ public class MeiZhiFragment extends BaseFragment<MeiZhiView, BeautyPresenter> im
     }
 
     @Override
-    protected BeautyPresenter createPresenter() {
-        return new BeautyPresenter(getContext());
+    protected MeiZhiPresenter createPresenter() {
+        return new MeiZhiPresenter(getContext());
     }
 
     @Override
@@ -44,7 +44,12 @@ public class MeiZhiFragment extends BaseFragment<MeiZhiView, BeautyPresenter> im
     }
 
     @Override
-    public RecyclerView getRecycleView() {
+    public void setDataRefresh(Boolean refresh) {
+        setRefresh(refresh);
+    }
+
+    @Override
+    public RecyclerView getRecyclerView() {
         return mRvBeauty;
     }
 

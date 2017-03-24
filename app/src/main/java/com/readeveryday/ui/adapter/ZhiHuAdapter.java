@@ -2,6 +2,8 @@ package com.readeveryday.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.hardware.display.DisplayManagerCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
@@ -27,6 +29,9 @@ import com.readeveryday.utils.ScreenUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,6 +52,9 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public static final int LOAD_END = 3;
     private static final int TYPE_TOP = -1;
     private static final int TYPE_FOOTER = -2;
+
+    // 执行周期性或定时任务
+    private ScheduledExecutorService mScheduledExecutorService;
 
     public ZhiHuAdapter(Context context, NewsTimeLine newsTimeLine) {
         this.mContext = context;
@@ -99,7 +107,22 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             contentViewHolder.bindView(newsTimeLine.getStories().get(position - 1));
         }
 
+    }
 
+    @Override
+    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+        if (holder instanceof TopViewHolder) {
+            TopViewHolder topViewHolder = (TopViewHolder) holder;
+            topViewHolder.startAutoRun();
+        }
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
+        if (holder instanceof TopViewHolder) {
+            TopViewHolder topViewHolder = (TopViewHolder) holder;
+            topViewHolder.stopAutoRun();
+        }
     }
 
     @Override
@@ -113,6 +136,15 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         ViewPager mVpTopStories;
         @BindView(R.id.tv_top_title)
         TextView mTvTopTitle;
+        private int currentItem = 0;// ImageViewpager当前页面的index
+        private Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                mVpTopStories.setCurrentItem(currentItem);
+            }
+        };
+
+        final List<ImageView> imageViewList = new ArrayList<ImageView>();
 
         public TopViewHolder(View itemView) {
             super(itemView);
@@ -121,7 +153,6 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         public void bindView(final List<TopStories> stories) {
 
-            List<ImageView> imageViewList = new ArrayList<ImageView>();
             for (int i = 0; i < stories.size(); i++) {
                 ImageView imageView = new ImageView(mContext);
                 ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -141,6 +172,7 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             mVpTopStories.setAdapter(new ZhiHuViewPagerAdapter(imageViewList));
             mTvTopTitle.setText(stories.get(0).getTitle());
             mVpTopStories.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -153,10 +185,47 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
                 @Override
                 public void onPageScrollStateChanged(int state) {
-
                 }
             });
         }
+
+        /**
+         * 开启定时任务
+         */
+        public void startAutoRun() {
+            mScheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+            /**循环
+             * 创建并执行一个在给定初始延迟后首次启用的定期操作， 后续操作具有给定的周期；也就是将在 initialDelay 后开始执行，
+             * 然后在initialDelay+period 后执行，接着在 initialDelay + 2 * period 后执行， 依此类推
+             */
+            mScheduledExecutorService.scheduleAtFixedRate(new ViewPagerTask(), 5, 5, TimeUnit.SECONDS);
+        }
+
+        /**
+         * 关闭定时任务
+         */
+        public void stopAutoRun() {
+            if (mScheduledExecutorService != null) {
+                mScheduledExecutorService.shutdown();
+            }
+        }
+
+        /**
+         * 发消息改变页数
+         *
+         * @author sujingbo
+         */
+        class ViewPagerTask implements Runnable {
+
+            @Override
+            public void run() {
+                if (imageViewList != null) {
+                    currentItem = (currentItem + 1) % imageViewList.size();
+                    handler.obtainMessage().sendToTarget();
+                }
+            }
+        }
+
     }
 
     class FooterViewHolder extends RecyclerView.ViewHolder {
@@ -186,7 +255,6 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     itemView.setVisibility(View.VISIBLE);
                     break;
                 case LOAD_NONE:
-                    System.out.println("LOAD_NONE----");
                     mProgress.setVisibility(View.GONE);
                     mTvLoadPrompt.setText("已无更多加载");
                     break;

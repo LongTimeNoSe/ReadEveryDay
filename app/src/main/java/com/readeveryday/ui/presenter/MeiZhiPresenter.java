@@ -26,7 +26,7 @@ import rx.schedulers.Schedulers;
  * Created by XuYanping on 2017/3/20.
  */
 
-public class BeautyPresenter extends BasePresenter<MeiZhiView> {
+public class MeiZhiPresenter extends BasePresenter<MeiZhiView> {
 
     private Context mContext;
     private MeiZhiView mView;
@@ -37,7 +37,7 @@ public class BeautyPresenter extends BasePresenter<MeiZhiView> {
     private List<Gank> mList;
     int page = 1;
 
-    public BeautyPresenter(Context context) {
+    public MeiZhiPresenter(Context context) {
         mContext = context;
     }
 
@@ -45,19 +45,19 @@ public class BeautyPresenter extends BasePresenter<MeiZhiView> {
 
         mView = getView();
         if (mView != null) {
-            mRecyclerView = mView.getRecycleView();
+            mRecyclerView = mView.getRecyclerView();
             mButton = mView.getFloatingActionButton();
             mLayoutManager = mView.getCardLayoutManager();
             mRecyclerView.setLayoutManager(mLayoutManager);
             gankApi.getMeizhiData(page).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Meizhi>() {
                 @Override
                 public void onCompleted() {
-
+                    mView.setDataRefresh(false);
                 }
 
                 @Override
                 public void onError(Throwable e) {
-
+                    mView.setDataRefresh(false);
                 }
 
                 @Override
@@ -87,7 +87,7 @@ public class BeautyPresenter extends BasePresenter<MeiZhiView> {
             recyclerView.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
         }
-
+        view.setDataRefresh(false);
         CardConfig.initConfig(context);
         final TanTanCallback callback = new TanTanCallback(recyclerView, mAdapter, mList);
 

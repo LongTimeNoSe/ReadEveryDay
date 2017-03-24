@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.readeveryday.R;
-import com.readeveryday.greendao.MeiZhiCollectionDao;
 import com.readeveryday.ui.base.BaseActivity;
 import com.readeveryday.ui.presenter.MeiZhiDetailPresenter;
 import com.readeveryday.ui.view.MeiZhiDetailView;

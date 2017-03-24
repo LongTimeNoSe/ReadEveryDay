@@ -21,12 +21,12 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
-        MeiZhiCollectionDao.createTable(db, ifNotExists);
+        MyCollectDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
-        MeiZhiCollectionDao.dropTable(db, ifExists);
+        MyCollectDao.dropTable(db, ifExists);
     }
 
     /**
@@ -45,7 +45,7 @@ public class DaoMaster extends AbstractDaoMaster {
 
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
-        registerDaoClass(MeiZhiCollectionDao.class);
+        registerDaoClass(MyCollectDao.class);
     }
 
     public DaoSession newSession() {

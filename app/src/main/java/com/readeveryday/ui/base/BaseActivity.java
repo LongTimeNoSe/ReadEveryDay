@@ -1,5 +1,10 @@
 package com.readeveryday.ui.base;
 
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,11 +14,14 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.MenuItem;
 
 import com.readeveryday.R;
 import com.readeveryday.utils.StatusBarUtil;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -142,4 +150,26 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
 
     protected abstract Toolbar getToolbar();
 
+    public void startActivity(Class cls) {
+
+        Intent intent = new Intent();
+        intent.setClass(this, cls);
+        startActivity(intent);
+    }
+
+    //判断activity是否显示在界面上
+    public boolean isForeground(Context context, String className) {
+        if (context == null || TextUtils.isEmpty(className)) {
+            return false;
+        }
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> list = am.getRunningTasks(1);
+        if (list != null && list.size() > 0) {
+            ComponentName cpn = list.get(0).topActivity;
+            if (className.equals(cpn.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

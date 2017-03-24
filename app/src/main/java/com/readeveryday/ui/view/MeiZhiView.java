@@ -10,11 +10,13 @@ import com.readeveryday.manager.CardLayoutManager;
  */
 
 public interface MeiZhiView {
+    void setDataRefresh(Boolean refresh);
 
-    RecyclerView getRecycleView();
+    RecyclerView getRecyclerView();
 
     FloatingActionButton getFloatingActionButton();
 
     CardLayoutManager getCardLayoutManager();
+
 
 }

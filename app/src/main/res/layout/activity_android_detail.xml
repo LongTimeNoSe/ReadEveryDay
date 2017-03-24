@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_android_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.readeveryday.ui.activity.AndroidDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:theme="@style/ToolbarStyle"
+            app:layout_scrollFlags="enterAlways|scroll"
+            >
+        </android.support.v7.widget.Toolbar>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <WebView
+                android:id="@+id/webview_detail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbarSize="3dp"
+                android:scrollbarThumbVertical="@color/tabBackground"
+                android:visibility="gone"/>
+
+            <app.dinus.com.loadingdrawable.LoadingView
+                android:id="@+id/collision_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:loading_renderer="CollisionLoadingRenderer"
+                android:layout_centerInParent="true"
+                />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

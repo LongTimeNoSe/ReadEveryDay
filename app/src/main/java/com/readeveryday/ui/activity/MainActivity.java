@@ -97,19 +97,23 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+
         switch (item.getItemId()) {
 
             case R.id.nav_home:
-                PromptUtil.snackbarShow(mActivityMain, "首页");
+                if (isForeground(this, "com.readeveryday.ui.activity.MainActivity")) {
+                    break;
+                }
+                startActivity(MainActivity.class);
                 break;
-            case R.id.nav_menu:
-                PromptUtil.snackbarShow(mActivityMain, "菜单");
+            case R.id.nav_collection:
+                PromptUtil.snackbarShow(mActivityMain, "收藏");
                 break;
-            case R.id.nav_about:
-                PromptUtil.snackbarShow(mActivityMain, "关于");
+            case R.id.nav_about_me:
+                PromptUtil.snackbarShow(mActivityMain, "关于我");
                 break;
-            case R.id.nav_contact_me:
-                PromptUtil.snackbarShow(mActivityMain, "联系我");
+            case R.id.nav_about_read_everyday:
+                PromptUtil.snackbarShow(mActivityMain, "关于ReadEveryDay");
                 break;
 
         }
