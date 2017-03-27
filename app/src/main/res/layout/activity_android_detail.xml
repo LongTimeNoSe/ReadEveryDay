@@ -41,14 +41,22 @@
                 android:id="@+id/collision_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:loading_renderer="CollisionLoadingRenderer"
                 android:layout_centerInParent="true"
+                app:loading_renderer="CollisionLoadingRenderer"
                 />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/collection"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/collection"/>
 
         </RelativeLayout>
 
-
     </LinearLayout>
-
 
 </RelativeLayout>

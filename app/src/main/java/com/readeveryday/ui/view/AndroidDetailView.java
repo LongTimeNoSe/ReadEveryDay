@@ -1,5 +1,6 @@
 package com.readeveryday.ui.view;
 
+import android.support.design.widget.FloatingActionButton;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
@@ -16,5 +17,8 @@ public interface AndroidDetailView {
 
     //获取WebView
     WebView getWebView();
+
+    //收藏
+    FloatingActionButton getFloatingActionButton();
 
 }

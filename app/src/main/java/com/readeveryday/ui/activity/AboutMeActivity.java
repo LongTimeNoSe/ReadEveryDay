@@ -1,8 +1,7 @@
 package com.readeveryday.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.Animation;
@@ -17,7 +16,7 @@ import com.readeveryday.utils.StatusBarUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WelcomeActivity extends BaseActivity {
+public class AboutMeActivity extends BaseActivity {
 
     @BindView(R.id.tv_third)
     TextView mTvThird;
@@ -25,6 +24,8 @@ public class WelcomeActivity extends BaseActivity {
     TextView mSecond;
     @BindView(R.id.tv_first)
     TextView mTvFirst;
+    @BindView(R.id.go_home)
+    FloatingActionButton mGoHome;
 
     @Override
     protected void onStart() {
@@ -39,7 +40,7 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     protected int createViewLayoutId() {
-        return R.layout.activity_welcome;
+        return R.layout.activity_about_me;
     }
 
     private void startAnimation() {
@@ -50,12 +51,12 @@ public class WelcomeActivity extends BaseActivity {
         anim_1.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-//                PromptUtil.toastShowShort(WelcomeActivity.this, "开始");
+//                PromptUtil.toastShowShort(AboutMeActivity.this, "开始");
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
-//                PromptUtil.toastShowShort(WelcomeActivity.this, "结束");
+//                PromptUtil.toastShowShort(AboutMeActivity.this, "结束");
 
                 anim_2.setAnimationListener(new Animation.AnimationListener() {
                     @Override
@@ -73,8 +74,8 @@ public class WelcomeActivity extends BaseActivity {
 
                             @Override
                             public void onAnimationEnd(Animation animation) {
-                                startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
-                                WelcomeActivity.this.finish();
+                                mGoHome.setVisibility(View.VISIBLE);
+
                             }
 
                             @Override
@@ -97,7 +98,7 @@ public class WelcomeActivity extends BaseActivity {
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-//                PromptUtil.toastShowShort(WelcomeActivity.this, "重复");
+//                PromptUtil.toastShowShort(AboutMeActivity.this, "重复");
             }
         });
         mTvFirst.setVisibility(View.VISIBLE);
@@ -121,5 +122,12 @@ public class WelcomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+        mGoHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(MainActivity.class);
+                AboutMeActivity.this.finish();
+            }
+        });
     }
 }

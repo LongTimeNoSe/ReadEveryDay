@@ -4,13 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.hardware.display.DisplayManagerCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -24,7 +21,6 @@ import com.readeveryday.bean.zhihu.NewsTimeLine;
 import com.readeveryday.bean.zhihu.Stories;
 import com.readeveryday.bean.zhihu.TopStories;
 import com.readeveryday.ui.activity.ZhiHuDetailActivity;
-import com.readeveryday.utils.PromptUtil;
 import com.readeveryday.utils.ScreenUtil;
 
 import java.util.ArrayList;
@@ -164,6 +160,8 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     public void onClick(View v) {
                         Intent intent = new Intent(mContext, ZhiHuDetailActivity.class);
                         intent.putExtra("newsId", stories.get(finalI).getId());
+                        intent.putExtra("title", stories.get(finalI).getTitle());
+                        intent.putExtra("newsImageUrl", stories.get(finalI).getImage());
                         mContext.startActivity(intent);
                     }
                 });
@@ -297,7 +295,8 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     Intent intent = new Intent(mContext, ZhiHuDetailActivity.class);
 
                     intent.putExtra("newsId", stories.getId());
-
+                    intent.putExtra("title", stories.getTitle());
+                    intent.putExtra("newsImageUrl", stories.getImages()[0]);
                     mContext.startActivity(intent);
                 }
             });

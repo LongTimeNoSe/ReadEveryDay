@@ -1,19 +1,25 @@
 package com.readeveryday.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.readeveryday.Constants;
 import com.readeveryday.R;
 import com.readeveryday.greendao.MyCollect;
-import com.readeveryday.greendao.MyCollectDao;
-import com.readeveryday.manager.GreenDaoManager;
+import com.readeveryday.ui.activity.AndroidDetailActivity;
+import com.readeveryday.ui.activity.MeiZhiDetailActivity;
+import com.readeveryday.ui.activity.ZhiHuDetailActivity;
+import com.readeveryday.utils.ScreenUtil;
 
 import java.util.List;
 
@@ -27,35 +33,33 @@ import butterknife.ButterKnife;
 public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
-    private MyCollectDao mDao;
-    private static int TYPE_MEIZHI = 1;
-    private static int TYPE_NEWS = 2;
-    private static int TYPE_NODATA = -1;
+    private List<MyCollect> mList;
+    private ScreenUtil screenUtil;
+    private int screenWidth;
 
-    public CollectAdapter(Context context) {
+    public CollectAdapter(Context context, List<MyCollect> list) {
         mContext = context;
-        mDao = GreenDaoManager.getGreenDaoManager(mContext).getDaoSession().getMyCollectDao();
+        mList = list;
+        screenUtil = ScreenUtil.instance(context);
+        screenWidth = screenUtil.getScreenWidth();
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (queryCollect() == null | queryCollect().size() <= 0) {
-            return TYPE_NODATA;
+        String type = mList.get(position).getType();
+        if (type.equals(Constants.FROMMEIZHI)) {
+            return Constants.TYPE_MEIZHI;
         } else {
-            if (queryCollect().get(position).getType().equals(Constants.FROMANDROID) | queryCollect().get(position).getType().equals(Constants.FROMZHIHU)) {
-                return TYPE_NEWS;
-            } else {
-                return TYPE_MEIZHI;
-            }
+            return Constants.TYPE_NEWS;
         }
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == TYPE_MEIZHI) {
+        if (viewType == Constants.TYPE_MEIZHI) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_collect_meizhi, null);
             return new MeiZhiViewHolder(view);
-        } else if (viewType == TYPE_NEWS) {
+        } else if (viewType == Constants.TYPE_NEWS) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_collect_news, null);
             return new NewsViewHolder(view);
         } else {
@@ -66,25 +70,22 @@ public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        if (holder instanceof MeiZhiViewHolder) {
-            MeiZhiViewHolder meiZhiViewHolder = (MeiZhiViewHolder) holder;
-            meiZhiViewHolder.BindItem();
-        } else if (holder instanceof NewsViewHolder) {
-            NewsViewHolder newsViewHolder = (NewsViewHolder) holder;
-            newsViewHolder.BindItem();
-        }
+        MyCollect myCollect = mList.get(position);
 
+        if (holder instanceof NewsViewHolder) {
+            NewsViewHolder newsViewHolder = (NewsViewHolder) holder;
+            newsViewHolder.BindItem(myCollect.getNewsTitle(), myCollect.getNewsImageUrl(), myCollect.getNewsUrl(), mList.get(position).getNewsId(), mList.get(position).getType());
+        } else if (holder instanceof MeiZhiViewHolder) {
+            MeiZhiViewHolder meiZhiViewHolder = (MeiZhiViewHolder) holder;
+            meiZhiViewHolder.BindItem(mList.get(position).getMeiZhiImageUrl());
+        }
     }
 
     @Override
     public int getItemCount() {
-        return queryCollect().size();
+        return mList.size();
     }
 
-    public List<MyCollect> queryCollect() {
-        List<MyCollect> list = mDao.queryBuilder().build().list();
-        return list;
-    }
 
     class NewsViewHolder extends RecyclerView.ViewHolder {
 
@@ -100,9 +101,39 @@ public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         public NewsViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            mCardCollectNews.setLayoutParams(new LinearLayout.LayoutParams(screenWidth, LinearLayout.LayoutParams.WRAP_CONTENT));
         }
 
-        public void BindItem() {
+        public void BindItem(final String title, String newsImageUrl, final String newsUrl, final String newsId, String type) {
+            mTvNewsTitle.setText(title);
+            Glide.with(mContext).load(newsImageUrl).centerCrop().error(R.drawable.loder_error).into(mIvNewsImage);
+            boolean fromZhiHu = false;
+            switch (type) {
+                case Constants.FROMANDROID:
+                    mTvFrom.setText("来自" + Constants.FROMANDROID);
+                    fromZhiHu = false;
+                    break;
+                case Constants.FROMZHIHU:
+                    mTvFrom.setText("来自" + Constants.FROMZHIHU);
+                    fromZhiHu = true;
+                    break;
+            }
+            final boolean finalFromZhiHu = fromZhiHu;
+            mCardCollectNews.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent;
+                    if (finalFromZhiHu) {
+                        intent = new Intent(mContext, ZhiHuDetailActivity.class);
+                        intent.putExtra("newsId", newsId);
+                    } else {
+                        intent = new Intent(mContext, AndroidDetailActivity.class);
+                        intent.putExtra("url", newsUrl);
+                        intent.putExtra("title", title);
+                    }
+                    mContext.startActivity(intent);
+                }
+            });
 
         }
     }
@@ -119,10 +150,21 @@ public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         public MeiZhiViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            mCardCollectMeizhi.setLayoutParams(new LinearLayout.LayoutParams(screenWidth, LinearLayout.LayoutParams.WRAP_CONTENT));
         }
 
-        public void BindItem() {
-
+        public void BindItem(final String imageUrl) {
+            mTvFrom.setText("来自" + Constants.FROMMEIZHI);
+            Log.d("url", imageUrl);
+            Glide.with(mContext).load(imageUrl).centerCrop().error(R.drawable.loder_error).into(mIvMeizhi);
+            mCardCollectMeizhi.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, MeiZhiDetailActivity.class);
+                    intent.putExtra("url", imageUrl);
+                    mContext.startActivity(intent);
+                }
+            });
         }
     }
 }

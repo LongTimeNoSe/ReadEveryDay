@@ -2,9 +2,9 @@ package com.readeveryday.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.webkit.WebView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.readeveryday.R;
@@ -26,8 +26,11 @@ public class AndroidDetailActivity extends BaseActivity<AndroidDetailView, Andro
     Toolbar mToolbar;
     String url;
     String title;
+    String imageUrl;
     @BindView(R.id.collision_view)
     LoadingView mCollisionView;
+    @BindView(R.id.collection)
+    FloatingActionButton mCollection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +40,9 @@ public class AndroidDetailActivity extends BaseActivity<AndroidDetailView, Andro
         if (intent != null) {
             url = intent.getStringExtra("url");
             title = intent.getStringExtra("title");
+            imageUrl = intent.getStringExtra("imageUrl");
             setTitle(title);
-            mPresenter.setData(url);
+            mPresenter.setData(url, title, imageUrl);
         }
 
     }
@@ -67,6 +71,11 @@ public class AndroidDetailActivity extends BaseActivity<AndroidDetailView, Andro
     @Override
     public WebView getWebView() {
         return mWebviewDetail;
+    }
+
+    @Override
+    public FloatingActionButton getFloatingActionButton() {
+        return mCollection;
     }
 
     @Override

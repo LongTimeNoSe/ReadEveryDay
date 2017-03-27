@@ -100,20 +100,25 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         switch (item.getItemId()) {
 
-            case R.id.nav_home:
-                if (isForeground(this, "com.readeveryday.ui.activity.MainActivity")) {
-                    break;
-                }
-                startActivity(MainActivity.class);
-                break;
+//            case R.id.nav_home:
+//                if (isForeground(this, "com.readeveryday.ui.activity.MainActivity")) {
+//                    break;
+//                }
+//                startActivity(MainActivity.class);
+//                break;
             case R.id.nav_collection:
-                PromptUtil.snackbarShow(mActivityMain, "收藏");
+//                PromptUtil.snackbarShow(mActivityMain, "收藏");
+                startActivity(CollectActivity.class);
+                this.finish();
                 break;
             case R.id.nav_about_me:
-                PromptUtil.snackbarShow(mActivityMain, "关于我");
+//                PromptUtil.snackbarShow(mActivityMain, "关于我");
+                startActivity(AboutMeActivity.class);
+                this.finish();
                 break;
             case R.id.nav_about_read_everyday:
                 PromptUtil.snackbarShow(mActivityMain, "关于ReadEveryDay");
+                startActivity(AboutReadEveryDayActivity.class);
                 break;
 
         }

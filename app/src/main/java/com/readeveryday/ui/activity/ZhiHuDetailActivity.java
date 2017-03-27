@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -34,13 +35,23 @@ public class ZhiHuDetailActivity extends BaseActivity<ZhiHuDetailView, ZhiHuDeta
     LoadingView mCollisionView;
     @BindView(R.id.activity_zhi_hu_detail)
     CoordinatorLayout mActivityZhiHuDetail;
+    @BindView(R.id.collection)
+    FloatingActionButton mCollection;
+
+    private String id;
+    private String title;
+    private String newsImageUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        String id = intent.getStringExtra("newsId");
-        mPresenter.initView(id);
+        if (intent != null) {
+            id = intent.getStringExtra("newsId");
+            title = intent.getStringExtra("title");
+            newsImageUrl = intent.getStringExtra("newsImageUrl");
+        }
+        mPresenter.initView(id, title, newsImageUrl);
         setTitle(mPresenter.setTitle());
     }
 
@@ -82,6 +93,11 @@ public class ZhiHuDetailActivity extends BaseActivity<ZhiHuDetailView, ZhiHuDeta
     @Override
     public Toolbar getThisToolbar() {
         return mToolbar;
+    }
+
+    @Override
+    public FloatingActionButton getFloatingActionButton() {
+        return mCollection;
     }
 
     @Override

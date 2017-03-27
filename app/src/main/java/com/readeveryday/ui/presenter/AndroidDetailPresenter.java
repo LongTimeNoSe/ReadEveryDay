@@ -2,14 +2,23 @@ package com.readeveryday.ui.presenter;
 
 import android.content.Context;
 import android.os.Build;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.readeveryday.Constants;
+import com.readeveryday.R;
+import com.readeveryday.greendao.MyCollect;
+import com.readeveryday.greendao.MyCollectDao;
+import com.readeveryday.manager.GreenDaoManager;
 import com.readeveryday.ui.base.BasePresenter;
 import com.readeveryday.ui.view.AndroidDetailView;
+import com.readeveryday.utils.PromptUtil;
+
+import java.util.List;
 
 import app.dinus.com.loadingdrawable.LoadingView;
 
@@ -23,20 +32,59 @@ public class AndroidDetailPresenter extends BasePresenter<AndroidDetailView> {
     private AndroidDetailView mView;
     private LoadingView mLoadingView;
     private WebView mWebView;
+    private FloatingActionButton mCollection;
+    private MyCollectDao mDao;
+    private MyCollect mMyCollect;
+    private String title;
+    private String url;
+    private String imageUrl;
+    private boolean isCollected;
+
 
     public AndroidDetailPresenter(Context context) {
         mContext = context;
+        mDao = GreenDaoManager.getGreenDaoManager(mContext).getDaoSession().getMyCollectDao();
     }
 
-    public void setData(String url) {
-
+    public void setData(String url, String title, String imageUrl) {
+        this.title = title;
+        this.url = url;
+        this.imageUrl = imageUrl;
         mView = getView();
         if (mView != null) {
-            mLoadingView = mView.getLoadingView();
-            mWebView = mView.getWebView();
+            initData();
             initWebView();
             mWebView.loadUrl(url);
+
         }
+    }
+
+    private void initData() {
+
+        mLoadingView = mView.getLoadingView();
+        mWebView = mView.getWebView();
+        mCollection = mView.getFloatingActionButton();
+        if (queryAndroidNews() != null && queryAndroidNews().size() > 0) {
+            mCollection.setImageResource(R.drawable.collected);
+            isCollected = true;
+        } else {
+            mCollection.setImageResource(R.drawable.collection);
+            isCollected = false;
+        }
+        mCollection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isCollected) {
+                    mCollection.setImageResource(R.drawable.collection);
+                    deleteAndroidNews();
+                    PromptUtil.toastShowShort(mContext, "取消收藏成功");
+                } else {
+                    mCollection.setImageResource(R.drawable.collected);
+                    insertAndroidNews();
+                    PromptUtil.toastShowShort(mContext, "收藏成功");
+                }
+            }
+        });
     }
 
     private void initWebView() {
@@ -164,6 +212,26 @@ public class AndroidDetailPresenter extends BasePresenter<AndroidDetailView> {
 
         public ImageClickInterface(Context context) {
             mContext = context;
+        }
+    }
+
+    //数据库增加
+    public void insertAndroidNews() {
+        mMyCollect = new MyCollect("", "", title, imageUrl, url, "", Constants.FROMANDROID);
+        mDao.insert(mMyCollect);
+    }
+
+    //数据库查询
+    public List<MyCollect> queryAndroidNews() {
+        List<MyCollect> list = mDao.queryBuilder().where(MyCollectDao.Properties.NewsTitle.eq(title)).build().list();
+        return list;
+    }
+
+    //数据库删除
+    public void deleteAndroidNews() {
+        List<MyCollect> list = mDao.queryBuilder().where(MyCollectDao.Properties.NewsTitle.eq(title)).build().list();
+        for (MyCollect item : list) {
+            mDao.delete(item);
         }
     }
 }

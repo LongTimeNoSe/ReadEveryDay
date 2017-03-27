@@ -1,5 +1,6 @@
 package com.readeveryday.ui.view;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -22,4 +23,6 @@ public interface ZhiHuDetailView {
     LoadingView getLoadingView();
 
     Toolbar getThisToolbar();
+
+    FloatingActionButton getFloatingActionButton();
 }

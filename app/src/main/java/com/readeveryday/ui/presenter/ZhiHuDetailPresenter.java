@@ -2,6 +2,7 @@ package com.readeveryday.ui.presenter;
 
 import android.content.Context;
 import android.os.Build;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -11,10 +12,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.readeveryday.Constants;
 import com.readeveryday.R;
 import com.readeveryday.bean.zhihu.News;
+import com.readeveryday.greendao.MyCollect;
+import com.readeveryday.greendao.MyCollectDao;
+import com.readeveryday.manager.GreenDaoManager;
 import com.readeveryday.ui.base.BasePresenter;
 import com.readeveryday.ui.view.ZhiHuDetailView;
+import com.readeveryday.utils.PromptUtil;
+
+import java.util.List;
 
 import app.dinus.com.loadingdrawable.LoadingView;
 import rx.Subscriber;
@@ -33,24 +41,67 @@ public class ZhiHuDetailPresenter extends BasePresenter<ZhiHuDetailView> {
     private WebView mWebView;
     private Toolbar mToolbar;
     private ImageView mTopImage;
+    private FloatingActionButton mCollection;
     private TextView mDesc;
+
+    private MyCollectDao mDao;
+    private MyCollect mMyCollect;
     private String title;
+    private String newsTitle;
+    private String newsId;
+    private String newsImageUrl;
+    private String newsUrl;
+    private boolean isCollected;
 
     public ZhiHuDetailPresenter(Context context) {
         mContext = context;
+        mDao = GreenDaoManager.getGreenDaoManager(mContext).getDaoSession().getMyCollectDao();
     }
 
-    public void initView(String id) {
-
+    public void initView(String id, String title, String newsImageUrl) {
+        this.newsId = id;
+        this.newsTitle = title;
+        this.newsImageUrl = newsImageUrl;
         mView = getView();
         if (mView != null) {
-            mLoadingView = mView.getLoadingView();
-            mWebView = mView.getWebView();
-            mToolbar = mView.getThisToolbar();
-            mTopImage = mView.getTopImageView();
-            mDesc = mView.getTopDescribe();
+            initDat();
             loadingData(id);
         }
+    }
+
+    private void initDat() {
+        mLoadingView = mView.getLoadingView();
+        mWebView = mView.getWebView();
+        mToolbar = mView.getThisToolbar();
+        mTopImage = mView.getTopImageView();
+        mCollection = mView.getFloatingActionButton();
+        mDesc = mView.getTopDescribe();
+
+        if (queryAndroidNews() != null && queryAndroidNews().size() > 0) {
+            mCollection.setImageResource(R.drawable.collected);
+            isCollected = true;
+        } else {
+            mCollection.setImageResource(R.drawable.collection);
+            isCollected = false;
+        }
+
+        mCollection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isCollected) {
+                    mCollection.setImageResource(R.drawable.collection);
+                    deleteAndroidNews();
+                    isCollected = false;
+                    PromptUtil.toastShowShort(mContext, "取消收藏成功");
+                } else {
+                    mCollection.setImageResource(R.drawable.collected);
+                    insertAndroidNews();
+                    isCollected = true;
+                    PromptUtil.toastShowShort(mContext, "收藏成功");
+                }
+            }
+        });
+
     }
 
     public void loadingData(String id) {
@@ -79,8 +130,8 @@ public class ZhiHuDetailPresenter extends BasePresenter<ZhiHuDetailView> {
                 "\t<link rel=\"stylesheet\" href=\"" + news.getCss()[0] + "\"/>\n" +
                 "</head>";
         String img = "<div class=\"headline\">";
-        String html = head + news.getBody().replace(img, " ");
-        mWebView.loadDataWithBaseURL(null, html, "text/html", "utf-8", null);
+        newsUrl = head + news.getBody().replace(img, " ");
+        mWebView.loadDataWithBaseURL(null, newsUrl, "text/html", "utf-8", null);
         mToolbar.setTitle(news.getTitle());
         title = news.getTitle();
         mDesc.setText(news.getImage_source());
@@ -122,5 +173,25 @@ public class ZhiHuDetailPresenter extends BasePresenter<ZhiHuDetailView> {
     @Override
     public String setTitle() {
         return title;
+    }
+
+    //数据库增加
+    public void insertAndroidNews() {
+        mMyCollect = new MyCollect("", "", newsTitle, newsImageUrl, newsUrl, newsId, Constants.FROMANDROID);
+        mDao.insert(mMyCollect);
+    }
+
+    //数据库查询
+    public List<MyCollect> queryAndroidNews() {
+        List<MyCollect> list = mDao.queryBuilder().where(MyCollectDao.Properties.NewsTitle.eq(newsTitle)).build().list();
+        return list;
+    }
+
+    //数据库删除
+    public void deleteAndroidNews() {
+        List<MyCollect> list = mDao.queryBuilder().where(MyCollectDao.Properties.NewsTitle.eq(newsTitle)).build().list();
+        for (MyCollect item : list) {
+            mDao.delete(item);
+        }
     }
 }

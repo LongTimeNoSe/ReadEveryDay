@@ -128,6 +128,7 @@ public class AndroidListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     Intent intent = new Intent(mContext, AndroidDetailActivity.class);
                     intent.putExtra("url", resultsBean.getUrl());
                     intent.putExtra("title", resultsBean.getDesc());
+                    intent.putExtra("imageUrl", resultsBean.getImages().get(0));
                     mContext.startActivity(intent);
                 }
             });

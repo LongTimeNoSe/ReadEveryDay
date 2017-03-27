@@ -6,6 +6,9 @@
                                     android:layout_height="match_parent"
                                     android:orientation="vertical"
                                     app:cardCornerRadius="4dp"
+                                    app:cardElevation="5dp"
+                                    app:cardPreventCornerOverlap="true"
+                                    app:cardUseCompatPadding="true"
                                     app:contentPadding="10dp">
 
     <LinearLayout
@@ -33,6 +36,12 @@
                 android:layout_gravity="right"/>
 
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginRight="80dp"
+            android:background="@color/main_background"/>
 
         <TextView
             android:id="@+id/tv_from"

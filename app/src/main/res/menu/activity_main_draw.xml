@@ -7,29 +7,29 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/menu_home"
-            android:title="首页"/>
+            android:title="Home"/>
 
         <item
             android:id="@+id/nav_collection"
             android:icon="@drawable/menu_collection"
-            android:title="收藏"/>
+            android:title="Collection"/>
 
     </group>
 
     <item
-        android:title="关于">
+        android:title="About">
 
         <menu>
 
             <item
                 android:id="@+id/nav_about_me"
                 android:icon="@drawable/menu_about_me"
-                android:title="关于我"/>
+                android:title="AboutMe"/>
 
             <item
                 android:id="@+id/nav_about_read_everyday"
                 android:icon="@drawable/menu_about_project"
-                android:title="关于ReadEveryDay"/>
+                android:title="AboutReadEveryDay"/>
 
 
         </menu>

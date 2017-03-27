@@ -17,26 +17,28 @@ public class MyCollect {
     private String newsTitle;
     private String newsImageUrl;
     private String newsUrl;
+    private String newsId;
     private String type;
 
-    public MyCollect(String meiZhiImageUrl, String meiZhiImageDesc, String newsTitle, String newsImageUrl, String newsUrl, String type) {
+    public MyCollect(String meiZhiImageUrl, String meiZhiImageDesc, String newsTitle, String newsImageUrl, String newsUrl, String newsId, String type) {
         this.meiZhiImageUrl = meiZhiImageUrl;
         this.meiZhiImageDesc = meiZhiImageDesc;
         this.newsTitle = newsTitle;
         this.newsImageUrl = newsImageUrl;
         this.newsUrl = newsUrl;
         this.type = type;
+        this.newsId = newsId;
     }
 
-    @Generated(hash = 1506882456)
-    public MyCollect(Long Id, String meiZhiImageUrl, String meiZhiImageDesc, String newsTitle, String newsImageUrl, String newsUrl,
-            String type) {
+    @Generated(hash = 28034497)
+    public MyCollect(Long Id, String meiZhiImageUrl, String meiZhiImageDesc, String newsTitle, String newsImageUrl, String newsUrl, String newsId, String type) {
         this.Id = Id;
         this.meiZhiImageUrl = meiZhiImageUrl;
         this.meiZhiImageDesc = meiZhiImageDesc;
         this.newsTitle = newsTitle;
         this.newsImageUrl = newsImageUrl;
         this.newsUrl = newsUrl;
+        this.newsId = newsId;
         this.type = type;
     }
 
@@ -90,6 +92,14 @@ public class MyCollect {
 
     public void setNewsUrl(String newsUrl) {
         this.newsUrl = newsUrl;
+    }
+
+    public String getNewsId() {
+        return this.newsId;
+    }
+
+    public void setNewsId(String newsId) {
+        this.newsId = newsId;
     }
 
     public String getType() {

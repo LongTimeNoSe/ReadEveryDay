@@ -114,7 +114,7 @@ public class MeiZhiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     //数据库增加
     public void insertMeiZhi(int position) {
-        mMyCollect = new MyCollect(mList.get(position).getUrl(), mList.get(position).getDesc(), "", "", "", Constants.FROMMEIZHI);
+        mMyCollect = new MyCollect(mList.get(position).getUrl(), mList.get(position).getDesc(), "", "", "", "", Constants.FROMMEIZHI);
         mDao.insert(mMyCollect);
     }
 
