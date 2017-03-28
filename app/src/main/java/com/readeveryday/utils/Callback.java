@@ -12,26 +12,20 @@ import static com.readeveryday.utils.CardConfig.SCALE_GAP;
 import static com.readeveryday.utils.CardConfig.TRANS_Y_GAP;
 
 /**
- * 介绍：人人影视效果的Callback
  * 作者：zhangxutong
- * 邮箱：mcxtzhang@163.com
- * 主页：http://blog.csdn.net/zxt0601
- * 时间： 16/12/18.
  */
 
-public class RenRenCallback extends ItemTouchHelper.SimpleCallback {
+public class Callback extends ItemTouchHelper.SimpleCallback {
 
     protected RecyclerView mRv;
     protected List mDatas;
     protected RecyclerView.Adapter mAdapter;
 
-    public RenRenCallback(RecyclerView rv, RecyclerView.Adapter adapter, List datas) {
-        this(0, ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT,
-                rv, adapter, datas);
+    public Callback(RecyclerView rv, RecyclerView.Adapter adapter, List datas) {
+        this(0, ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, rv, adapter, datas);
     }
 
-    public RenRenCallback(int dragDirs, int swipeDirs
-            , RecyclerView rv, RecyclerView.Adapter adapter, List datas) {
+    public Callback(int dragDirs, int swipeDirs, RecyclerView rv, RecyclerView.Adapter adapter, List datas) {
         super(dragDirs, swipeDirs);
         mRv = rv;
         mAdapter = adapter;

@@ -14,14 +14,10 @@ import static com.readeveryday.utils.CardConfig.TRANS_Y_GAP;
 
 
 /**
- * 介绍：探探效果定制的Callback
  * 作者：zhangxutong
- * 邮箱：mcxtzhang@163.com
- * 主页：http://blog.csdn.net/zxt0601
- * 时间： 16/12/18.
  */
 
-public class TanTanCallback extends RenRenCallback {
+public class MeiZhiCallback extends Callback {
     private static final int MAX_ROTATION = 15;
 
     //2016 12 26 考虑 探探垂直上下方向滑动，不删除卡片，
@@ -29,12 +25,12 @@ public class TanTanCallback extends RenRenCallback {
     int mHorizontalDeviation;
 
 
-    public TanTanCallback(RecyclerView rv, RecyclerView.Adapter adapter, List datas) {
+    public MeiZhiCallback(RecyclerView rv, RecyclerView.Adapter adapter, List datas) {
         super(rv, adapter, datas);
         mHorizontalDeviation = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, mRv.getContext().getResources().getDisplayMetrics());
     }
 
-    public TanTanCallback(int dragDirs, int swipeDirs, RecyclerView rv, RecyclerView.Adapter adapter, List datas) {
+    public MeiZhiCallback(int dragDirs, int swipeDirs, RecyclerView rv, RecyclerView.Adapter adapter, List datas) {
         super(dragDirs, swipeDirs, rv, adapter, datas);
     }
 
@@ -42,7 +38,7 @@ public class TanTanCallback extends RenRenCallback {
         return mHorizontalDeviation;
     }
 
-    public TanTanCallback setHorizontalDeviation(int horizontalDeviation) {
+    public MeiZhiCallback setHorizontalDeviation(int horizontalDeviation) {
         mHorizontalDeviation = horizontalDeviation;
         return this;
     }

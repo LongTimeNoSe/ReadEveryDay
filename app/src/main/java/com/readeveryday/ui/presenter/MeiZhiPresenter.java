@@ -14,7 +14,7 @@ import com.readeveryday.ui.base.BasePresenter;
 import com.readeveryday.ui.view.MeiZhiView;
 import com.readeveryday.utils.CardConfig;
 import com.readeveryday.utils.PromptUtil;
-import com.readeveryday.utils.TanTanCallback;
+import com.readeveryday.utils.MeiZhiCallback;
 
 import java.util.List;
 
@@ -89,7 +89,7 @@ public class MeiZhiPresenter extends BasePresenter<MeiZhiView> {
         }
         view.setDataRefresh(false);
         CardConfig.initConfig(context);
-        final TanTanCallback callback = new TanTanCallback(recyclerView, mAdapter, mList);
+        final MeiZhiCallback callback = new MeiZhiCallback(recyclerView, mAdapter, mList);
 
         //测试竖直滑动是否已经不会被移除屏幕
         //callback.setHorizontalDeviation(Integer.MAX_VALUE);
