@@ -38,6 +38,11 @@ public class AndroidFragment extends BaseFragment<AndroidView, AndroidPresenter>
     }
 
     @Override
+    public String getFragmentTag() {
+        return "AndroidFragment";
+    }
+
+    @Override
     public RecyclerView getRecyclerView() {
         return mContentList;
     }

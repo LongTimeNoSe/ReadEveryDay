@@ -64,4 +64,7 @@ dependencies {
     compile project(':library')
     //greenDao 数据库
     compile 'org.greenrobot:greendao:3.2.0'
+    //友盟统计
+    compile 'com.umeng.analytics:analytics:latest.integration'
+
 }

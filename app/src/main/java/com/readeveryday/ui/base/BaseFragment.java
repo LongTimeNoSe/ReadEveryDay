@@ -86,6 +86,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
         super.onDestroy();
         if (mPresenter != null) mPresenter.detachView();
     }
+
     public Boolean isSetRefresh() {
         return true;
     }
@@ -98,4 +99,11 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
 
     //绑定子布局文件
     protected abstract int createViewLayoutId();
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    public abstract String getFragmentTag();
 }

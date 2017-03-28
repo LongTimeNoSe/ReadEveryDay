@@ -59,6 +59,7 @@
             <intent-filter>
                 <data android:scheme="tencent100371282"/>
                 <action android:name="android.intent.action.VIEW"/>
+
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
@@ -87,6 +88,15 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
+        <!--友盟统计所需-->
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="	58da257b45297d5f37001b1f"></meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Umeng"></meta-data>
 
     </application>
 

@@ -23,6 +23,7 @@ import android.view.MenuItem;
 
 import com.readeveryday.R;
 import com.readeveryday.utils.StatusBarUtil;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
@@ -42,6 +43,18 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        MobclickAgent.setDebugMode(true);
+        // SDK在统计Fragment时，需要关闭Activity自带的页面统计，
+        // 然后在每个页面中重新集成页面统计的代码(包括调用了 onResume 和 onPause 的Activity)。
+        MobclickAgent.openActivityDurationTrack(false);
+        // MobclickAgent.setAutoLocation(true);
+        // MobclickAgent.setSessionContinueMillis(1000);
+        // MobclickAgent.startWithConfigure(
+        // new UMAnalyticsConfig(mContext, "4f83c5d852701564c0000011", "Umeng",
+        // EScenarioType.E_UM_NORMAL));
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
+
         //允许为空，不是所有都要实现MVP模式
         if (createPresenter() != null) {
             mPresenter = createPresenter();
@@ -175,4 +188,24 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         }
         return false;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (getActivityTag() != null) {
+            MobclickAgent.onPageStart(getActivityTag());
+        }
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (getActivityTag() != null) {
+            MobclickAgent.onPageEnd(getActivityTag());
+        }
+        MobclickAgent.onPause(this);
+    }
+
+    public abstract String getActivityTag();
 }
