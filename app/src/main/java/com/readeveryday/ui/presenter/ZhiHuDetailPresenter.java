@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -18,6 +19,9 @@ import com.readeveryday.bean.zhihu.News;
 import com.readeveryday.greendao.MyCollect;
 import com.readeveryday.greendao.MyCollectDao;
 import com.readeveryday.manager.GreenDaoManager;
+
+import app.dinus.com.loadingdrawable.onekeyshare.OnekeyShare;
+
 import com.readeveryday.ui.base.BasePresenter;
 import com.readeveryday.ui.view.ZhiHuDetailView;
 import com.readeveryday.utils.PromptUtil;
@@ -51,6 +55,7 @@ public class ZhiHuDetailPresenter extends BasePresenter<ZhiHuDetailView> {
     private String newsId;
     private String newsImageUrl;
     private String newsUrl;
+    private String url;
     private boolean isCollected;
 
     public ZhiHuDetailPresenter(Context context) {
@@ -126,6 +131,7 @@ public class ZhiHuDetailPresenter extends BasePresenter<ZhiHuDetailView> {
 
     private void setDatas(News news) {
 
+        url = news.getShare_url();
         String head = "<head>\n" +
                 "\t<link rel=\"stylesheet\" href=\"" + news.getCss()[0] + "\"/>\n" +
                 "</head>";
@@ -177,7 +183,7 @@ public class ZhiHuDetailPresenter extends BasePresenter<ZhiHuDetailView> {
 
     //数据库增加
     public void insertAndroidNews() {
-        mMyCollect = new MyCollect("", "", newsTitle, newsImageUrl, newsUrl, newsId, Constants.FROMANDROID);
+        mMyCollect = new MyCollect("", "", newsTitle, newsImageUrl, newsUrl, newsId, Constants.FROMZHIHU);
         mDao.insert(mMyCollect);
     }
 
@@ -193,5 +199,38 @@ public class ZhiHuDetailPresenter extends BasePresenter<ZhiHuDetailView> {
         for (MyCollect item : list) {
             mDao.delete(item);
         }
+    }
+
+    public void share() {
+
+        OnekeyShare share = new OnekeyShare();
+        share.disableSSOWhenAuthorize();
+        share.setTitle(mContext.getString(R.string.app_name));
+        share.setTitleUrl(url);
+        share.setText(mContext.getString(R.string.share_content));
+        share.setImageUrl(newsImageUrl);
+        share.setUrl(newsUrl);
+        share.setSite(mContext.getString(R.string.app_name));
+        share.setSiteUrl(newsUrl);
+        share.show(mContext);
+
+//        share.setTitle("我是分享标题");
+//        // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+//        share.setTitleUrl("https://www.baidu.com");
+//        // text是分享文本，所有平台都需要这个字段
+//        share.setText("我是分享内容");
+//        // url仅在微信（包括好友和朋友圈）中使用
+//        share.setUrl("http://mob.com ");
+//        share.setImageUrl("https://f1.webshare.mob.com/code/demo/img/1.jpg");
+//        share.setComment("我是测试评论文本");
+//        // site是分享此内容的网站名称，仅在QQ空间使用
+//        share.setSite(mContext.getString(R.string.app_name));
+//
+//        // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+//        share.setSiteUrl("http://www.baidu.com");
+//
+//        // 启动分享GUI
+//        share.show(mContext);
+
     }
 }

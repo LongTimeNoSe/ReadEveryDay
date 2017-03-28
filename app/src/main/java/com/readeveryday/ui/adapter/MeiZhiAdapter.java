@@ -77,7 +77,7 @@ public class MeiZhiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         public void BindItem(final int position) {
             mTvPosition.setText(position + 1 + "/" + mList.size());
-            Glide.with(mContext).load(mList.get(position).getUrl()).centerCrop().into(mIvBeauty);
+            Glide.with(mContext).load(mList.get(position).getUrl()).centerCrop().error(R.drawable.loder_error).into(mIvBeauty);
             mIvBeauty.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -1,8 +1,12 @@
 package com.readeveryday.ui.presenter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -18,9 +22,12 @@ import com.readeveryday.ui.base.BasePresenter;
 import com.readeveryday.ui.view.AndroidDetailView;
 import com.readeveryday.utils.PromptUtil;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 import app.dinus.com.loadingdrawable.LoadingView;
+import app.dinus.com.loadingdrawable.onekeyshare.OnekeyShare;
 
 /**
  * Created by XuYanping on 2017/3/17.
@@ -40,7 +47,6 @@ public class AndroidDetailPresenter extends BasePresenter<AndroidDetailView> {
     private String imageUrl;
     private boolean isCollected;
 
-
     public AndroidDetailPresenter(Context context) {
         mContext = context;
         mDao = GreenDaoManager.getGreenDaoManager(mContext).getDaoSession().getMyCollectDao();
@@ -55,7 +61,7 @@ public class AndroidDetailPresenter extends BasePresenter<AndroidDetailView> {
             initData();
             initWebView();
             mWebView.loadUrl(url);
-
+            initImagePath();
         }
     }
 
@@ -232,6 +238,47 @@ public class AndroidDetailPresenter extends BasePresenter<AndroidDetailView> {
         List<MyCollect> list = mDao.queryBuilder().where(MyCollectDao.Properties.NewsTitle.eq(title)).build().list();
         for (MyCollect item : list) {
             mDao.delete(item);
+        }
+    }
+
+    public void share() {
+
+        OnekeyShare share = new OnekeyShare();
+        share.disableSSOWhenAuthorize();
+        share.setTitle(mContext.getString(R.string.app_name));
+        share.setTitleUrl(url);
+        share.setText(mContext.getString(R.string.share_content));
+        if (imageUrl != null) {
+            share.setImageUrl(imageUrl);
+        } else {
+            share.setImagePath(localImage);
+        }
+        share.setUrl(url);
+        share.setSite(mContext.getString(R.string.app_name));
+        share.setSiteUrl(url);
+        share.show(mContext);
+    }
+    private String localImage;
+    private void initImagePath() {
+        try {// 判断SD卡中是否存在此文件夹
+            if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) && Environment.getExternalStorageDirectory().exists()) {
+                localImage = Environment.getExternalStorageDirectory().getAbsolutePath() + "/localImage.png";
+            } else {
+                localImage = mContext.getFilesDir().getAbsolutePath() + "/localImage.png";
+            }
+            File file = new File(localImage);
+            // 判断图片是否存此文件夹中
+            if (!file.exists()) {
+                file.createNewFile();
+                Bitmap pic = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.app_launcher);
+                FileOutputStream fos = new FileOutputStream(file);
+                pic.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                fos.flush();
+                fos.close();
+            }
+        } catch (Throwable t) {
+            t.printStackTrace();
+            localImage = null;
         }
     }
 }

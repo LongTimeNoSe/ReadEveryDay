@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.RelativeLayout;
 
@@ -11,6 +13,7 @@ import com.readeveryday.R;
 import com.readeveryday.ui.base.BaseActivity;
 import com.readeveryday.ui.presenter.AndroidDetailPresenter;
 import com.readeveryday.ui.view.AndroidDetailView;
+import com.readeveryday.utils.PromptUtil;
 import com.readeveryday.utils.StatusBarUtil;
 
 import app.dinus.com.loadingdrawable.LoadingView;
@@ -45,6 +48,18 @@ public class AndroidDetailActivity extends BaseActivity<AndroidDetailView, Andro
             mPresenter.setData(url, title, imageUrl);
         }
 
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_share:
+//                        PromptUtil.toastShowShort(AndroidDetailActivity.this,"分享");
+                        mPresenter.share();
+                        break;
+                }
+                return AndroidDetailActivity.super.onOptionsItemSelected(item);
+            }
+        });
     }
 
     @Override
@@ -87,5 +102,11 @@ public class AndroidDetailActivity extends BaseActivity<AndroidDetailView, Andro
     protected void setStatusBar() {
         super.setStatusBar();
         StatusBarUtil.setColorNoTranslucent(this, getResources().getColor(R.color.colorPrimary));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_right_menu, menu);
+        return true;
     }
 }

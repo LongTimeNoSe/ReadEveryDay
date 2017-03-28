@@ -166,7 +166,6 @@ public class TanTanCallback extends RenRenCallback {
             }
         }
 
-
         //可以在此判断左右滑：
         float v = mRv.getWidth() / 2 - viewHolder.itemView.getX() - (viewHolder.itemView.getWidth() / 2);
         if (v > 0) {

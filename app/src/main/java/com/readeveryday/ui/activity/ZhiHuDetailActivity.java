@@ -6,6 +6,8 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +16,7 @@ import com.readeveryday.R;
 import com.readeveryday.ui.base.BaseActivity;
 import com.readeveryday.ui.presenter.ZhiHuDetailPresenter;
 import com.readeveryday.ui.view.ZhiHuDetailView;
+import com.readeveryday.utils.PromptUtil;
 import com.readeveryday.utils.StatusBarUtil;
 
 import app.dinus.com.loadingdrawable.LoadingView;
@@ -53,6 +56,18 @@ public class ZhiHuDetailActivity extends BaseActivity<ZhiHuDetailView, ZhiHuDeta
         }
         mPresenter.initView(id, title, newsImageUrl);
         setTitle(mPresenter.setTitle());
+
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_share:
+                        mPresenter.share();
+                        break;
+                }
+                return ZhiHuDetailActivity.super.onOptionsItemSelected(item);
+            }
+        });
     }
 
     @Override
@@ -108,5 +123,11 @@ public class ZhiHuDetailActivity extends BaseActivity<ZhiHuDetailView, ZhiHuDeta
     @Override
     protected void setStatusBar() {
         StatusBarUtil.setTransparent(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_right_menu, menu);
+        return true;
     }
 }

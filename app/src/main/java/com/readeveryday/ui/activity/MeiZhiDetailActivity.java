@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -12,6 +14,7 @@ import com.readeveryday.R;
 import com.readeveryday.ui.base.BaseActivity;
 import com.readeveryday.ui.presenter.MeiZhiDetailPresenter;
 import com.readeveryday.ui.view.MeiZhiDetailView;
+import com.readeveryday.utils.PromptUtil;
 import com.readeveryday.utils.StatusBarUtil;
 
 import butterknife.BindView;
@@ -43,7 +46,18 @@ public class MeiZhiDetailActivity extends BaseActivity<MeiZhiDetailView, MeiZhiD
         desc = intent.getStringExtra("imageDesc");
         mPresenter.setData(url, desc);
 
-
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_share:
+//                        PromptUtil.toastShowShort(MeiZhiDetailActivity.this,"分享");
+                        mPresenter.share();
+                        break;
+                }
+                return MeiZhiDetailActivity.super.onOptionsItemSelected(item);
+            }
+        });
     }
 
     @Override
@@ -90,5 +104,11 @@ public class MeiZhiDetailActivity extends BaseActivity<MeiZhiDetailView, MeiZhiD
     protected void setStatusBar() {
         super.setStatusBar();
         StatusBarUtil.setColorNoTranslucent(this, getResources().getColor(R.color.colorPrimary));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_right_menu, menu);
+        return true;
     }
 }
