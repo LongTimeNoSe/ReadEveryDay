@@ -60,7 +60,7 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     //图片处理Glide
     compile 'com.github.bumptech.glide:glide:3.7.0'
-    //Loading Animator
+    //Loading Animator及其他一些依赖
     compile project(':library')
     //greenDao 数据库
     compile 'org.greenrobot:greendao:3.2.0'
