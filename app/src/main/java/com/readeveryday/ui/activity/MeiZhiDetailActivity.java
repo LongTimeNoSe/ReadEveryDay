@@ -76,6 +76,11 @@ public class MeiZhiDetailActivity extends BaseActivity<MeiZhiDetailView, MeiZhiD
     }
 
     @Override
+    public String getActivityTag() {
+        return "MeiZhiDetailActivity";
+    }
+
+    @Override
     public RelativeLayout getParentLayout() {
         return mActivityMeiZhiDetail;
     }

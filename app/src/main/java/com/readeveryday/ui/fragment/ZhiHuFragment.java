@@ -34,6 +34,11 @@ public class ZhiHuFragment extends BaseFragment<ZhiHuFgView, ZhiHuFgPresenter> i
     }
 
     @Override
+    public String getFragmentTag() {
+        return "ZhiHuFragment";
+    }
+
+    @Override
     protected void initView(View rootView) {
         mLayoutManager = new LinearLayoutManager(getContext());
         mContentList.setLayoutManager(mLayoutManager);

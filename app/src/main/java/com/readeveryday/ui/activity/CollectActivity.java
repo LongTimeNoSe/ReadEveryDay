@@ -81,6 +81,11 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPresenter>
     }
 
     @Override
+    public String getActivityTag() {
+        return "CollectActivity";
+    }
+
+    @Override
     protected void setStatusBar() {
         super.setStatusBar();
         StatusBarUtil.setColorNoTranslucent(this, getResources().getColor(R.color.colorPrimary));

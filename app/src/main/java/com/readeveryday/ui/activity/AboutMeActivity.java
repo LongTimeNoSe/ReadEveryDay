@@ -130,4 +130,9 @@ public class AboutMeActivity extends BaseActivity {
             }
         });
     }
+
+    @Override
+    public String getActivityTag() {
+        return "AboutMeActivity";
+    }
 }

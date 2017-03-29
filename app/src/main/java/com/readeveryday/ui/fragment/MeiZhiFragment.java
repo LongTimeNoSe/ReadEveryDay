@@ -44,6 +44,11 @@ public class MeiZhiFragment extends BaseFragment<MeiZhiView, MeiZhiPresenter> im
     }
 
     @Override
+    public String getFragmentTag() {
+        return "MeiZhiFragment";
+    }
+
+    @Override
     public void setDataRefresh(Boolean refresh) {
         setRefresh(refresh);
     }

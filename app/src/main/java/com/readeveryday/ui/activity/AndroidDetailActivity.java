@@ -77,6 +77,11 @@ public class AndroidDetailActivity extends BaseActivity<AndroidDetailView, Andro
         return mToolbar;
     }
 
+    @Override
+    public String getActivityTag() {
+        return "AndroidDetailActivity";
+    }
+
 
     @Override
     public LoadingView getLoadingView() {

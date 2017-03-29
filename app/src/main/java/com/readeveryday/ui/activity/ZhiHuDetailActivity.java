@@ -86,6 +86,11 @@ public class ZhiHuDetailActivity extends BaseActivity<ZhiHuDetailView, ZhiHuDeta
     }
 
     @Override
+    public String getActivityTag() {
+        return "ZhiHuDetailActivity";
+    }
+
+    @Override
     public WebView getWebView() {
         return mWbZhihuDetail;
     }

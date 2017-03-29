@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.readeveryday.R;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
 
@@ -103,6 +104,17 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     @Override
     public void onPause() {
         super.onPause();
+        if (getFragmentTag() != null) {
+            MobclickAgent.onPageEnd(getFragmentTag());
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getFragmentTag() != null) {
+            MobclickAgent.onPageStart(getFragmentTag());
+        }
     }
 
     public abstract String getFragmentTag();

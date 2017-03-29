@@ -42,6 +42,11 @@ public class AndroidFragment extends BaseFragment<AndroidView, AndroidPresenter>
         return "AndroidFragment";
     }
 
+//    @Override
+//    public String getFragmentTag() {
+//        return "AndroidFragment";
+//    }
+
     @Override
     public RecyclerView getRecyclerView() {
         return mContentList;

@@ -93,6 +93,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         return mToolbar;
     }
 
+    @Override
+    public String getActivityTag() {
+        return "MainActivity";
+    }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -116,7 +121,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 this.finish();
                 break;
             case R.id.nav_about_read_everyday:
-                PromptUtil.snackbarShow(mActivityMain, "关于ReadEveryDay");
+//                PromptUtil.snackbarShow(mActivityMain, "关于ReadEveryDay");
                 startActivity(AboutReadEveryDayActivity.class);
                 break;
 

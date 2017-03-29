@@ -37,4 +37,9 @@ public class AboutReadEveryDayActivity extends BaseActivity {
     public boolean canBack() {
         return true;
     }
+
+    @Override
+    public String getActivityTag() {
+        return "AboutReadEveryDayActivity";
+    }
 }

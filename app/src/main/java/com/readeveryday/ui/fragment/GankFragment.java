@@ -37,6 +37,11 @@ public class GankFragment extends BaseFragment<GankFgView, GankPresenter> implem
     }
 
     @Override
+    public String getFragmentTag() {
+        return "GankFragment";
+    }
+
+    @Override
     public void setDataRefresh(Boolean refresh) {
         setRefresh(refresh);
     }
