@@ -1,5 +1,6 @@
 package com.readeveryday.ui.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -93,7 +94,6 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     protected void setStatusBar() {
-        super.setStatusBar();
-        StatusBarUtil.setTransparent(this);
+        StatusBarUtil.transparentStatusBar(this);
     }
 }

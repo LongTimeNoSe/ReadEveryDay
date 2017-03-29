@@ -579,7 +579,7 @@ public class StatusBarUtil {
     /**
      * 设置透明
      */
-    private static void setTransparentForWindow(Activity activity) {
+    public static void setTransparentForWindow(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
             activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
@@ -592,7 +592,7 @@ public class StatusBarUtil {
      * 使状态栏透明
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    private static void transparentStatusBar(Activity activity) {
+    public static void transparentStatusBar(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
