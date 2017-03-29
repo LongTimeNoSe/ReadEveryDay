@@ -457,13 +457,12 @@ public class StatusBarUtil {
      *
      * @param activity       fragment 对应的 activity
      * @param needOffsetView 需要向下偏移的 View
-    public static void setTranslucentForImageViewInFragment(Activity activity, View needOffsetView) {
-        setTranslucentForImageViewInFragment(activity, DEFAULT_STATUS_BAR_ALPHA, needOffsetView);
-    }
-
-    /**
-     * 为 fragment 头部是 ImageView 的设置状态栏透明
-     *
+     *                       public static void setTranslucentForImageViewInFragment(Activity activity, View needOffsetView) {
+     *                       setTranslucentForImageViewInFragment(activity, DEFAULT_STATUS_BAR_ALPHA, needOffsetView);
+     *                       }
+     *                       <p>
+     *                       /**
+     *                       为 fragment 头部是 ImageView 的设置状态栏透明
      * @param activity       fragment 对应的 activity
      * @param needOffsetView 需要向下偏移的 View
      */

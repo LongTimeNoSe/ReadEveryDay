@@ -45,9 +45,9 @@ public class AboutMeActivity extends BaseActivity {
 
     private void startAnimation() {
 
-        final Animation anim = AnimationUtils.loadAnimation(this, R.anim.welcome_anim);
-        final Animation anim_1 = AnimationUtils.loadAnimation(this, R.anim.welcome_anim);
-        final Animation anim_2 = AnimationUtils.loadAnimation(this, R.anim.welcome_anim);
+        final Animation anim = AnimationUtils.loadAnimation(this, R.anim.about_me_anim);
+        final Animation anim_1 = AnimationUtils.loadAnimation(this, R.anim.about_me_anim);
+        final Animation anim_2 = AnimationUtils.loadAnimation(this, R.anim.about_me_anim);
         anim_1.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
