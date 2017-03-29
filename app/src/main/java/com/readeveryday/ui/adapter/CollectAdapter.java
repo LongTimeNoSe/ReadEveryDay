@@ -104,7 +104,7 @@ public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mCardCollectNews.setLayoutParams(new LinearLayout.LayoutParams(screenWidth, LinearLayout.LayoutParams.WRAP_CONTENT));
         }
 
-        public void BindItem(final String title, String newsImageUrl, final String newsUrl, final String newsId, String type) {
+        public void BindItem(final String title, final String newsImageUrl, final String newsUrl, final String newsId, String type) {
             mTvNewsTitle.setText(title);
             Glide.with(mContext).load(newsImageUrl).centerCrop().error(R.drawable.loder_error).into(mIvNewsImage);
             boolean fromZhiHu = false;
@@ -126,6 +126,9 @@ public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     if (finalFromZhiHu) {
                         intent = new Intent(mContext, ZhiHuDetailActivity.class);
                         intent.putExtra("newsId", newsId);
+                        intent.putExtra("newsImageUrl", newsImageUrl);
+                        intent.putExtra("title", title);
+
                     } else {
                         intent = new Intent(mContext, AndroidDetailActivity.class);
                         intent.putExtra("url", newsUrl);
