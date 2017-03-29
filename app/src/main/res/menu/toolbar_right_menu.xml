@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--
+    showAsAction=“ifRoom” 表示有空间就显示出来，没有就不显示，
+    never是不会显示在Toolbar上,
+    always 是显示在Toolbar上。
+    如果不显示就会以三个点的样式，点击三个点显示菜单。
+    -->
+    <item
+        android:id="@+id/menu_share"
+        android:icon="@drawable/menu_share"
+        android:title="分享"
+        app:showAsAction="always">
+
+    </item>
+
+</menu>
