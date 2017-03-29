@@ -23,7 +23,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:visibility="gone"
-            android:src="@drawable/go_home"/>
+            android:src="@drawable/next"/>
     </RelativeLayout>
 
 
