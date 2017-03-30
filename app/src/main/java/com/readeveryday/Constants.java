@@ -6,6 +6,7 @@ package com.readeveryday;
 
 public class Constants {
 
+    public static final String BMOBKEY = "daf0bb963d817c26304aa052fe70f92f";
     public static final String FROMMEIZHI = "MeiZhi";
     public static final String FROMANDROID = "Android";
     public static final String FROMZHIHU = "ZhiHu";

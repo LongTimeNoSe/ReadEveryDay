@@ -1,24 +1,17 @@
 package com.readeveryday.ui.base;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.TypedValue;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 
 import com.readeveryday.R;
@@ -52,7 +45,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         setContentView(createViewLayoutId());
         ButterKnife.bind(this);
         if (getToolbar() != null) {
-            mToolbar = (Toolbar) findViewById(R.id.toolbar);
+            mToolbar = getToolbar();
         }
         if (mToolbar != null) {
             setSupportActionBar(mToolbar); //把Toolbar当做ActionBar给设置

@@ -4,10 +4,12 @@ apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
+
     defaultConfig {
         applicationId "com.readeveryday"
         minSdkVersion 19
         targetSdkVersion 25
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -34,6 +36,9 @@ android {
         schemaVersion 1
         daoPackage 'com.readeveryday.greendao'
         targetGenDir 'src/main/java'
+    }
+    sourceSets {
+        main.jniLibs.srcDirs = ['libs']
     }
 }
 
@@ -66,5 +71,4 @@ dependencies {
     compile 'org.greenrobot:greendao:3.2.0'
     //友盟统计
     compile 'com.umeng.analytics:analytics:latest.integration'
-
 }

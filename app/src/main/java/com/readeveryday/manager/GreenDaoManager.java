@@ -11,50 +11,50 @@ import com.readeveryday.greendao.DaoSession;
 
 public class GreenDaoManager {
 
-    private Context mContext;
-    private DaoMaster.DevOpenHelper mHelper;
-    private DaoMaster mDaoMaster;
-    private DaoSession mDaoSession;
-    private static GreenDaoManager greenDaoManager;
+  private Context mContext;
+  private DaoMaster.DevOpenHelper mHelper;
+  private DaoMaster mDaoMaster;
+  private DaoSession mDaoSession;
+  private static GreenDaoManager greenDaoManager;
 
-    public GreenDaoManager(Context context) {
-        mContext = context;
-        mHelper = new DaoMaster.DevOpenHelper(mContext, "read_everyday_db", null);
-        mDaoMaster = new DaoMaster(mHelper.getWritableDatabase());
-        mDaoSession = mDaoMaster.newSession();
-    }
+  public GreenDaoManager(Context context) {
+    mContext = context;
+    mHelper = new DaoMaster.DevOpenHelper(mContext, "read_everyday_db", null);
+    mDaoMaster = new DaoMaster(mHelper.getWritableDatabase());
+    mDaoSession = mDaoMaster.newSession();
+  }
 
-    public static GreenDaoManager getGreenDaoManager(Context context) {
+  public static GreenDaoManager getGreenDaoManager(Context context) {
+    if (greenDaoManager == null) {
+      synchronized (GreenDaoManager.class) {
         if (greenDaoManager == null) {
-            synchronized (GreenDaoManager.class) {
-                if (greenDaoManager == null) {
-                    greenDaoManager = new GreenDaoManager(context);
-                }
-            }
+          greenDaoManager = new GreenDaoManager(context);
         }
-
-        return greenDaoManager;
+      }
     }
 
-    public DaoMaster.DevOpenHelper getHelper() {
-        return mHelper;
-    }
+    return greenDaoManager;
+  }
 
-    public DaoMaster getDaoMaster() {
-        return mDaoMaster;
-    }
+  public DaoMaster.DevOpenHelper getHelper() {
+    return mHelper;
+  }
 
-    public DaoSession getDaoSession() {
-        return mDaoSession;
-    }
+  public DaoMaster getDaoMaster() {
+    return mDaoMaster;
+  }
 
-    public void inntDatabase() {
+  public DaoSession getDaoSession() {
+    return mDaoSession;
+  }
 
-    }
+  public void inntDatabase() {
 
-    public void closeDB() {
-        if (mHelper != null) {
-            mHelper.close();
-        }
+  }
+
+  public void closeDB() {
+    if (mHelper != null) {
+      mHelper.close();
     }
+  }
 }
