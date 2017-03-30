@@ -71,8 +71,8 @@ public class WelcomeActivity extends BaseActivity {
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         mIvWelcome.setVisibility(View.GONE);
-                        startActivity(MainActivity.class);
-//                        startActivity(RegisterActivity.class);
+//                        startActivity(MainActivity.class);
+                        startActivity(LoginActivity.class);
                         WelcomeActivity.this.finish();
                     }
 

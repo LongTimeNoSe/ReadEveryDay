@@ -3,6 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    //透明度
+    <color name="colorAccent_alpha">#65FF4081</color>
 
     <color name="main_background">#eeeeee</color>
 
@@ -14,6 +16,7 @@
     <color name="main_pager_title_bg">#512e2e2e</color>
 
     <color name="color_ffffff">#ffffff</color>
+    <color name="color_ffffff_alpha">#e5ffffff</color>
 
     <color name="color_000000">#000000</color>
 

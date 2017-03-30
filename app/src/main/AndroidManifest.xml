@@ -48,6 +48,8 @@
         </activity>
         <activity android:name=".ui.activity.RegisterActivity">
         </activity>
+        <activity android:name=".ui.activity.LoginActivity">
+        </activity>
 
         <!--分享所需-->
 
