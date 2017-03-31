@@ -2,7 +2,6 @@ package com.readeveryday.ui.view;
 
 import android.support.design.widget.FloatingActionButton;
 import android.webkit.WebView;
-import android.widget.ProgressBar;
 
 import app.dinus.com.loadingdrawable.LoadingView;
 

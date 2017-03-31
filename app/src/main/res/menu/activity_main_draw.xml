@@ -7,12 +7,12 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/menu_home"
-            android:title="Home"/>
+            android:title="首页"/>
 
         <item
             android:id="@+id/nav_collection"
             android:icon="@drawable/menu_collection"
-            android:title="Collection"/>
+            android:title="收藏"/>
 
     </group>
 
@@ -24,17 +24,17 @@
             <item
                 android:id="@+id/nav_about_me"
                 android:icon="@drawable/menu_about_me"
-                android:title="AboutMe"/>
+                android:title="关于我"/>
 
             <item
                 android:id="@+id/nav_about_read_everyday"
                 android:icon="@drawable/menu_about_project"
-                android:title="AboutReadEveryDay"/>
+                android:title="关于ReadEveryDay"/>
 
             <item
                 android:id="@+id/nav_exit"
                 android:icon="@drawable/exit"
-                android:title="SignOut"/>
+                android:title="登出"/>
 
         </menu>
 

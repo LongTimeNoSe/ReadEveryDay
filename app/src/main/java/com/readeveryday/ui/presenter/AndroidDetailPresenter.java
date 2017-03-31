@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -91,6 +90,7 @@ public class AndroidDetailPresenter extends BasePresenter<AndroidDetailView> {
                 }
             }
         });
+
     }
 
     private void initWebView() {
@@ -258,7 +258,9 @@ public class AndroidDetailPresenter extends BasePresenter<AndroidDetailView> {
         share.setSiteUrl(url);
         share.show(mContext);
     }
+
     private String localImage;
+
     private void initImagePath() {
         try {// 判断SD卡中是否存在此文件夹
             if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) && Environment.getExternalStorageDirectory().exists()) {

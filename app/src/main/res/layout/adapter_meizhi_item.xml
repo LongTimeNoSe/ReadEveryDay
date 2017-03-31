@@ -14,7 +14,7 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:orientation="vertical"
         app:cardCornerRadius="4dp"
-        app:cardBackgroundColor="@color/color_ae1158">
+        app:cardBackgroundColor="@color/colorAccent_alpha">
 
         <ImageView
             android:id="@+id/iv_beauty"

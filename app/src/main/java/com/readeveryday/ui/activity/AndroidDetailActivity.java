@@ -13,7 +13,6 @@ import com.readeveryday.R;
 import com.readeveryday.ui.base.BaseActivity;
 import com.readeveryday.ui.presenter.AndroidDetailPresenter;
 import com.readeveryday.ui.view.AndroidDetailView;
-import com.readeveryday.utils.PromptUtil;
 import com.readeveryday.utils.StatusBarUtil;
 
 import app.dinus.com.loadingdrawable.LoadingView;
@@ -38,7 +37,6 @@ public class AndroidDetailActivity extends BaseActivity<AndroidDetailView, Andro
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         Intent intent = getIntent();
         if (intent != null) {
             url = intent.getStringExtra("url");
