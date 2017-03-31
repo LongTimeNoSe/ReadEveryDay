@@ -25,4 +25,8 @@ public interface ZhiHuDetailView {
     Toolbar getThisToolbar();
 
     FloatingActionButton getFloatingActionButton();
+
+    void toLogin();
+
+    boolean isLogin();
 }

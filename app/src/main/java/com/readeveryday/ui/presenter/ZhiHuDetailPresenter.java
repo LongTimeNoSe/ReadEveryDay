@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -19,9 +18,6 @@ import com.readeveryday.bean.zhihu.News;
 import com.readeveryday.greendao.MyCollect;
 import com.readeveryday.greendao.MyCollectDao;
 import com.readeveryday.manager.GreenDaoManager;
-
-import app.dinus.com.loadingdrawable.onekeyshare.OnekeyShare;
-
 import com.readeveryday.ui.base.BasePresenter;
 import com.readeveryday.ui.view.ZhiHuDetailView;
 import com.readeveryday.utils.PromptUtil;
@@ -29,6 +25,7 @@ import com.readeveryday.utils.PromptUtil;
 import java.util.List;
 
 import app.dinus.com.loadingdrawable.LoadingView;
+import app.dinus.com.loadingdrawable.onekeyshare.OnekeyShare;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -57,6 +54,7 @@ public class ZhiHuDetailPresenter extends BasePresenter<ZhiHuDetailView> {
     private String newsUrl;
     private String url;
     private boolean isCollected;
+    private boolean isLogin;
 
     public ZhiHuDetailPresenter(Context context) {
         mContext = context;
@@ -80,29 +78,35 @@ public class ZhiHuDetailPresenter extends BasePresenter<ZhiHuDetailView> {
         mToolbar = mView.getThisToolbar();
         mTopImage = mView.getTopImageView();
         mCollection = mView.getFloatingActionButton();
+        isLogin = mView.isLogin();
         mDesc = mView.getTopDescribe();
-
-        if (queryAndroidNews() != null && queryAndroidNews().size() > 0) {
-            mCollection.setImageResource(R.drawable.collected);
-            isCollected = true;
-        } else {
-            mCollection.setImageResource(R.drawable.collection);
-            isCollected = false;
+        if (isLogin) {
+            if (queryAndroidNews() != null && queryAndroidNews().size() > 0) {
+                mCollection.setImageResource(R.drawable.collected);
+                isCollected = true;
+            } else {
+                mCollection.setImageResource(R.drawable.collection);
+                isCollected = false;
+            }
         }
 
         mCollection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isCollected) {
-                    mCollection.setImageResource(R.drawable.collection);
-                    deleteAndroidNews();
-                    isCollected = false;
-                    PromptUtil.toastShowShort(mContext, "取消收藏成功");
+                if (isLogin) {
+                    if (isCollected) {
+                        mCollection.setImageResource(R.drawable.collection);
+                        deleteAndroidNews();
+                        isCollected = false;
+                        PromptUtil.toastShowShort(mContext, "取消收藏成功");
+                    } else {
+                        mCollection.setImageResource(R.drawable.collected);
+                        insertAndroidNews();
+                        isCollected = true;
+                        PromptUtil.toastShowShort(mContext, "收藏成功");
+                    }
                 } else {
-                    mCollection.setImageResource(R.drawable.collected);
-                    insertAndroidNews();
-                    isCollected = true;
-                    PromptUtil.toastShowShort(mContext, "收藏成功");
+                    mView.toLogin();
                 }
             }
         });

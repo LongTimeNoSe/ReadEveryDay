@@ -88,8 +88,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void setStatusBar() {
         super.setStatusBar();
-//        StatusBarUtil.setColorForDrawerLayout(this, mDrawerLayoutMain, getResources().getColor(R.color.colorPrimary), 0);
-//        StatusBarUtil.setColorForDrawerLayout(this, mDrawerLayoutMain, getResources().getColor(R.color.colorPrimary));
         StatusBarUtil.setColorNoTranslucent(this, getResources().getColor(R.color.colorPrimary));
     }
 
@@ -163,5 +161,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             builder.show();
         }
         return false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isLoging = mSharedPreferences.getBoolean("isLoging", false);
     }
 }

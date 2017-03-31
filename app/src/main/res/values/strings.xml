@@ -6,5 +6,6 @@
     <string name="about_read_everyday_address" translatable="false">项目地址：\n https://github.com/MissYouAllTheTime/ReadEveryDay</string>
     <string name="share_content" translatable="false">来自ReadEveryDay的一个美丽的分享</string>
     <string name="login">登   录</string>
-    <string name="register">没有账号？前往注册</string>
+    <string name="register">注   册</string>
+    <string name="no_count_register">没有账号？前往注册</string>
 </resources>

@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.readeveryday.bean.UserInfo;
 import com.readeveryday.ui.base.BasePresenter;
@@ -24,6 +25,7 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
     private RegisterView mView;
     private EditText mUserName, mPsw, mSurePsw;
     private Button mRegister;
+    private ImageView mBack;
     private String userName, psw, surePsw;
     private UserInfo mUserInfo;
 
@@ -39,9 +41,18 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
             mPsw = mView.getPsw();
             mSurePsw = mView.getSurePsw();
             mRegister = mView.getRegister();
+            mBack = mView.getBack();
             mRegister.setOnClickListener(mRegisterClickListener);
+            mBack.setOnClickListener(mBackClickListener);
         }
     }
+
+    View.OnClickListener mBackClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
 
     View.OnClickListener mRegisterClickListener = new View.OnClickListener() {
         @Override
@@ -60,7 +71,6 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
             }
             mUserInfo.setUsername(userName);
             mUserInfo.setPassword(psw);
-//            mUserInfo.setEmail("18310815881@163.com");
             mUserInfo.signUp(new SaveListener<UserInfo>() {
 
                 @Override
@@ -86,4 +96,8 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
 //            });
         }
     };
+
+    interface BackInterface {
+        void goBack();
+    }
 }

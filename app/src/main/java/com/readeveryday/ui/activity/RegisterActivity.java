@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.readeveryday.R;
 import com.readeveryday.ui.base.BaseActivity;
@@ -25,6 +26,8 @@ public class RegisterActivity extends BaseActivity<RegisterView, RegisterPresent
     EditText mEtSurePsw;
     @BindView(R.id.bt_register)
     Button mBtRegister;
+    @BindView(R.id.iv_back)
+    ImageView mIvBack;
 
     @Override
     protected RegisterPresenter createPresenter() {
@@ -67,8 +70,18 @@ public class RegisterActivity extends BaseActivity<RegisterView, RegisterPresent
     }
 
     @Override
+    public ImageView getBack() {
+        return mIvBack;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter.initView();
     }
+
+//    @Override
+//    protected void setStatusBar() {
+//        StatusBarUtil.transparentStatusBar(this);
+//    }
 }

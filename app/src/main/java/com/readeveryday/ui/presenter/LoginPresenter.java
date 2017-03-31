@@ -28,12 +28,8 @@ public class LoginPresenter extends BasePresenter<LoginView> {
     private Button mLogin, mRegister;
     private LoginView mView;
     private String userName, psw;
-
     private UserInfo mUserInfo;
     private BmobQuery<UserInfo> mQuery;
-
-    private LoginInterface mLoginInterface;
-    private RegisterInterface mRegisterInterface;
 
     private SharedPreferences.Editor mEditor;
 
@@ -43,16 +39,14 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         mQuery = new BmobQuery<UserInfo>();
     }
 
-    public void login(LoginInterface mLoginInterface, RegisterInterface mRegisterInterface,SharedPreferences.Editor editor) {
-        this.mEditor = editor;
-        this.mLoginInterface = mLoginInterface;
-        this.mRegisterInterface = mRegisterInterface;
+    public void login() {
         mView = getView();
         if (mView != null) {
             mUserName = mView.getUserName();
             mPsw = mView.getPsw();
             mLogin = mView.login();
             mRegister = mView.register();
+            mEditor = mView.getEdit();
             mLogin.setOnClickListener(mLoginClickListener);
             mRegister.setOnClickListener(mRegisterClickListener);
         }
@@ -77,51 +71,23 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                 public void done(BmobUser user, BmobException e) {
 
                     if (e == null) {
-//                        PromptUtil.toastShowShort(mContext, "登录成功");
-//                        mContext.startActivity(new Intent(mContext, MainActivity.class));
-                        mLoginInterface.toLogin();
                         mEditor.putString("userName", userName);
                         mEditor.putString("psw", userName);
                         mEditor.putBoolean("isLoging", true);
                         mEditor.apply();
-
+                        mView.loginSuccess();
                     } else {
                         PromptUtil.toastShowShort(mContext, "账号或密码错误" + e.getMessage());
                     }
                 }
             });
-
-//            mQuery.getObject(userName, new QueryListener<UserInfo>() {
-//                @Override
-//                public void done(UserInfo info, BmobException e) {
-//
-//                    if (e == null) {
-//                        if (info.getPsw().equals(psw)) {
-//                            PromptUtil.toastShowShort(mContext, "登录成功");
-//                            mContext.startActivity(new Intent(mContext, MainActivity.class));
-//                        } else {
-//                            PromptUtil.toastShowShort(mContext, "用户名或密码错误");
-//                        }
-//                    } else {
-//                        PromptUtil.toastShowShort(mContext, "错误" + e.getMessage());
-//                    }
-//                }
-//            });
         }
     };
 
     View.OnClickListener mRegisterClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            mRegisterInterface.toRegister();
+            mView.toRegister();
         }
     };
-
-    public interface LoginInterface {
-        void toLogin();
-    }
-
-    public interface RegisterInterface {
-        void toRegister();
-    }
 }

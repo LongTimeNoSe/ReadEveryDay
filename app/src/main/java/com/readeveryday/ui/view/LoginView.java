@@ -1,5 +1,6 @@
 package com.readeveryday.ui.view;
 
+import android.content.SharedPreferences;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -17,4 +18,9 @@ public interface LoginView {
 
     Button register();
 
+    void loginSuccess();
+
+    void toRegister();
+
+    SharedPreferences.Editor getEdit();
 }
