@@ -15,4 +15,6 @@ public interface LoginView {
 
     Button login();
 
+    Button register();
+
 }

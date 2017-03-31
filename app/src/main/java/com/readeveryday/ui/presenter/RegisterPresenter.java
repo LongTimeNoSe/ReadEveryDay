@@ -2,7 +2,6 @@ package com.readeveryday.ui.presenter;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,20 +58,32 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
                 PromptUtil.toastShowShort(mContext, "两次输入密码不一致，请核对后继续");
                 return;
             }
-            mUserInfo.setUserName(userName);
-            mUserInfo.setPsw(psw);
-            mUserInfo.save(new SaveListener<String>() {
-                @Override
-                public void done(String s, BmobException e) {
-                    if (e == null) {
-                        PromptUtil.toastShowShort(mContext, "注册成功");
-                    } else {
-                        PromptUtil.toastShowShort(mContext, "注册失败");
-                        Log.d("error", e.getMessage());
-                    }
+            mUserInfo.setUsername(userName);
+            mUserInfo.setPassword(psw);
+//            mUserInfo.setEmail("18310815881@163.com");
+            mUserInfo.signUp(new SaveListener<UserInfo>() {
 
+                @Override
+                public void done(UserInfo info, BmobException e) {
+                    if (e == null) {
+                        PromptUtil.toastShowShort(mContext, "注册成功" + info.toString());
+                    } else {
+                        PromptUtil.toastShowShort(mContext, "注册失败" + e.getMessage());
+                    }
                 }
             });
+//            mUserInfo.save(new SaveListener<String>() {
+//                @Override
+//                public void done(String s, BmobException e) {
+//                    if (e == null) {
+//                        PromptUtil.toastShowShort(mContext, "注册成功");
+//                    } else {
+//                        PromptUtil.toastShowShort(mContext, "注册失败");
+//                        Log.d("error", e.getMessage());
+//                    }
+//
+//                }
+//            });
         }
     };
 }

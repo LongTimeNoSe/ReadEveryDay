@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.readeveryday.manager.GreenDaoManager;
+import com.readeveryday.manager.SharedPreferencesManager;
 import com.umeng.analytics.MobclickAgent;
 
 import cn.bmob.v3.Bmob;
@@ -37,9 +38,10 @@ public class MyApplication extends Application {
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
         //数据库
         GreenDaoManager.getGreenDaoManager(mContext);
-
-//        Bmob.initialize(mContext, Constants.BMOBKEY);
-
+        /**
+         * Bmob后端云（实现登录注册功能）
+         */
+        //Bmob.initialize(mContext, Constants.BMOBKEY);
         BmobConfig config = new BmobConfig.Builder(mContext)
                 ////设置appkey
                 .setApplicationId(Constants.BMOBKEY)
@@ -50,5 +52,7 @@ public class MyApplication extends Application {
                 ////文件的过期时间(单位为秒)：默认1800s
                 .setFileExpiration(2500).build();
         Bmob.initialize(config);
+        //初始化shared
+        SharedPreferencesManager.getSharedPreferencesManager(mContext);
     }
 }

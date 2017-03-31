@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 import com.readeveryday.R;
+import com.readeveryday.manager.GreenDaoUserInfoManager;
 import com.readeveryday.ui.adapter.FragmentAdapter;
 import com.readeveryday.ui.base.BaseActivity;
 import com.readeveryday.ui.base.BaseFragment;
@@ -22,7 +23,6 @@ import com.readeveryday.ui.base.BasePresenter;
 import com.readeveryday.ui.fragment.AndroidFragment;
 import com.readeveryday.ui.fragment.MeiZhiFragment;
 import com.readeveryday.ui.fragment.ZhiHuFragment;
-import com.readeveryday.utils.PromptUtil;
 import com.readeveryday.utils.StatusBarUtil;
 
 import java.util.ArrayList;
@@ -48,6 +48,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @BindView(R.id.drawerLayout_main)
     DrawerLayout mDrawerLayoutMain;
 
+    GreenDaoUserInfoManager mUserInfoManager;
+    boolean isLoging;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +60,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         toggle.syncState();
         mNavView.setItemIconTintList(null);
         mNavView.setNavigationItemSelectedListener(this);
+        mUserInfoManager = new GreenDaoUserInfoManager(this);
+        isLoging = mSharedPreferences.getBoolean("isLoging", false);
     }
 
     @Override
@@ -113,7 +118,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                break;
             case R.id.nav_collection:
 //                PromptUtil.snackbarShow(mActivityMain, "收藏");
-                startActivity(CollectActivity.class);
+                if (isLoging) {
+                    startActivity(CollectActivity.class);
+                } else {
+                    startActivity(LoginActivity.class);
+                }
+
                 break;
             case R.id.nav_about_me:
 //                PromptUtil.snackbarShow(mActivityMain, "关于我");
@@ -123,6 +133,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.nav_about_read_everyday:
 //                PromptUtil.snackbarShow(mActivityMain, "关于ReadEveryDay");
                 startActivity(AboutReadEveryDayActivity.class);
+                break;
+            case R.id.nav_exit:
+//                PromptUtil.snackbarShow(mActivityMain, "退出账号");
+                mSharedPreferences.edit().putString("userName", "").putString("psw", "").putBoolean("isLoging", false).apply();
+                isLoging = false;
                 break;
 
         }

@@ -1,5 +1,7 @@
 package com.readeveryday.ui.base;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,6 +25,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     protected T mPresenter;
     private boolean mIsRequestDataRefresh = false;
     private SwipeRefreshLayout mRefreshLayout;
+    protected SharedPreferences mSharedPreferences;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,6 +34,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
             mPresenter = createPresenter();
             mPresenter.attachView((V) this);
         }
+        mSharedPreferences = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
     }
 
     @Nullable

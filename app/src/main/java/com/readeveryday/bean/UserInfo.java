@@ -1,29 +1,20 @@
 package com.readeveryday.bean;
 
-import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.BmobUser;
 
 /**
  * Created by XuYanping on 2017/3/29.
  */
 
-public class UserInfo extends BmobObject{
+public class UserInfo extends BmobUser{
 
-    private String userName;
-    private String psw;
+    private Integer age;
 
-    public String getUserName() {
-        return userName;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPsw() {
-        return psw;
-    }
-
-    public void setPsw(String psw) {
-        this.psw = psw;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }

@@ -31,6 +31,10 @@
                 android:icon="@drawable/menu_about_project"
                 android:title="AboutReadEveryDay"/>
 
+            <item
+                android:id="@+id/nav_exit"
+                android:icon="@drawable/exit"
+                android:title="SignOut"/>
 
         </menu>
 

@@ -2,81 +2,83 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/login_bg"
                 android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+    <ImageView
+        android:id="@+id/iv_app_launcher"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_alignParentTop="true"
-        android:background="@color/colorPrimary"
-        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:theme="@style/ToolbarStyle">
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:background="@color/colorAccent_alpha"
+        android:padding="10dp"
+        android:src="@drawable/about_read_everyday_head"/>
 
-    </android.support.v7.widget.Toolbar>
-
-    <RelativeLayout
+    <EditText
+        android:id="@+id/et_user_name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"
-        android:background="@drawable/login_bg">
+        android:layout_height="40dp"
+        android:layout_below="@+id/iv_app_launcher"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/edit_bg"
+        android:drawableLeft="@drawable/user_name"
+        android:drawablePadding="20dp"
+        android:hint="请输入用户名"
+        android:paddingLeft="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="13sp"/>
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="40dp"
-            android:background="@color/colorAccent_alpha"
-            android:padding="10dp"
-            android:src="@drawable/about_read_everyday_head"/>
+    <EditText
+        android:id="@+id/et_psw"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/et_user_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/edit_bg"
+        android:drawableLeft="@drawable/password"
+        android:drawablePadding="20dp"
+        android:hint="请输入密码"
+        android:paddingLeft="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="13sp"/>
 
-        <Button
-            android:id="@+id/bt_login"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/login_button_bg"
-            android:text="@string/login"
-            android:textColor="@color/color_000000"/>
+    <Button
+        android:id="@+id/bt_login"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/et_psw"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/login_button_bg"
+        android:text="@string/login"
+        android:textColor="@color/white"/>
 
 
-        <EditText
-            android:id="@+id/et_user_name"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_above="@+id/et_psw"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/edit_bg"
-            android:drawableLeft="@drawable/user_name"
-            android:drawablePadding="20dp"
-            android:hint="请输入用户名"
-            android:paddingLeft="10dp"
-            android:textColorHint="@color/white"
-            android:textSize="13sp"/>
+    <Button
+        android:id="@+id/bt_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@null"
+        android:drawablePadding="10dp"
+        android:drawableRight="@drawable/arrow_right"
+        android:gravity="center"
+        android:text="@string/register"
+        android:textColor="@color/white"/>
 
-        <EditText
-            android:id="@+id/et_psw"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_above="@+id/bt_login"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="60dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/edit_bg"
-            android:drawableLeft="@drawable/password"
-            android:drawablePadding="20dp"
-            android:hint="请输入密码"
-            android:paddingLeft="10dp"
-            android:textColorHint="@color/white"
-            android:textSize="13sp"/>
-    </RelativeLayout>
 
 </RelativeLayout>

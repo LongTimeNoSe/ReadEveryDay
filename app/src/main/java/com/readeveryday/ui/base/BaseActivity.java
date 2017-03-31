@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -32,6 +33,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     protected Toolbar mToolbar;
     private SwipeRefreshLayout mRefreshLayout;
     private boolean mIsRequestDataRefresh = false;
+    protected SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         }
         setContentView(createViewLayoutId());
         ButterKnife.bind(this);
+        mSharedPreferences = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         if (getToolbar() != null) {
             mToolbar = getToolbar();
         }
@@ -153,6 +156,12 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         Intent intent = new Intent();
         intent.setClass(this, cls);
         startActivity(intent);
+    }
+
+    public void startActivityForResult(Class cls, int state) {
+        Intent intent = new Intent();
+        intent.setClass(this, cls);
+        startActivityForResult(intent, state);
     }
 
     //判断activity是否显示在界面上
