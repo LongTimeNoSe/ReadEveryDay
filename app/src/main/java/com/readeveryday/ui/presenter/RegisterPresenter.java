@@ -50,7 +50,7 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
     View.OnClickListener mBackClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            mView.finishActivity();
         }
     };
 
@@ -82,22 +82,6 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
                     }
                 }
             });
-//            mUserInfo.save(new SaveListener<String>() {
-//                @Override
-//                public void done(String s, BmobException e) {
-//                    if (e == null) {
-//                        PromptUtil.toastShowShort(mContext, "注册成功");
-//                    } else {
-//                        PromptUtil.toastShowShort(mContext, "注册失败");
-//                        Log.d("error", e.getMessage());
-//                    }
-//
-//                }
-//            });
         }
     };
-
-    interface BackInterface {
-        void goBack();
-    }
 }

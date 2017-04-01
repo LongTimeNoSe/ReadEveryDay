@@ -19,4 +19,6 @@ public interface RegisterView {
     Button getRegister();
 
     ImageView getBack();
+
+    void finishActivity();
 }

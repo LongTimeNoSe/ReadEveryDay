@@ -10,6 +10,7 @@ import com.readeveryday.R;
 import com.readeveryday.ui.base.BaseActivity;
 import com.readeveryday.ui.presenter.RegisterPresenter;
 import com.readeveryday.ui.view.RegisterView;
+import com.readeveryday.utils.StatusBarUtil;
 
 import butterknife.BindView;
 
@@ -75,13 +76,19 @@ public class RegisterActivity extends BaseActivity<RegisterView, RegisterPresent
     }
 
     @Override
+    public void finishActivity() {
+        RegisterActivity.this.finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter.initView();
     }
 
-//    @Override
-//    protected void setStatusBar() {
-//        StatusBarUtil.transparentStatusBar(this);
-//    }
+    @Override
+    protected void setStatusBar() {
+        super.setStatusBar();
+        StatusBarUtil.setColorNoTranslucent(this, getResources().getColor(R.color.colorPrimary));
+    }
 }

@@ -5,6 +5,7 @@ import com.readeveryday.api.ApiFactory;
 import com.readeveryday.api.DailyApi;
 import com.readeveryday.api.GankApi;
 import com.readeveryday.api.ZhiHuApi;
+import com.readeveryday.manager.SharedPreferencesManager;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
@@ -21,6 +22,7 @@ public abstract class BasePresenter<V> {
     public static final GankApi gankApi = ApiFactory.getGankSingleton();
     public static final DailyApi dailyApi = ApiFactory.getDailySingleton();
     public static final AndroidApi androidApi = ApiFactory.getAndroidSingleton();
+    public static final String userName = SharedPreferencesManager.getSharedPreferencesManager().mPreferencesl.getString("userName", "");
 
     //附加View (弱引用)
     public void attachView(V view) {

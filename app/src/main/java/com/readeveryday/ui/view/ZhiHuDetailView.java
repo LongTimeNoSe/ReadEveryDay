@@ -29,4 +29,5 @@ public interface ZhiHuDetailView {
     void toLogin();
 
     boolean isLogin();
+
 }

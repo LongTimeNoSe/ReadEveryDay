@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_mei_zhi_detail"
     android:layout_width="match_parent"
@@ -31,14 +32,64 @@
             android:layout_height="match_parent"
             />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_down_meizhi"
+        <com.readeveryday.widget.ArcMenu
+            android:id="@+id/meizhi_detail_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="20dp"
             android:layout_marginRight="20dp"
-            android:src="@drawable/down"/>
+            android:background="@null"
+            app:position="right_bottom"
+            app:radius="90dp">
+
+            <RelativeLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/meizhi_detail_edit"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/add"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_down_meizhi"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/meizhi_detail_edit"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/down"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_collect_meizhi"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/meizhi_detail_edit"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_collect_meizhi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/collection"/>
+
+            </RelativeLayout>
+
+        </com.readeveryday.widget.ArcMenu>
 
     </android.support.design.widget.CoordinatorLayout>
 

@@ -3,27 +3,27 @@ package com.readeveryday.manager;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import static com.readeveryday.MyApplication.mContext;
+
 /**
  * Created by XuYanping on 2017/3/31.
  */
 
 public class SharedPreferencesManager {
-    private Context mContext;
 
     private static SharedPreferencesManager manager;
 
-    private SharedPreferences mPreferencesl;
+    public SharedPreferences mPreferencesl;
 
-    public SharedPreferencesManager(Context context) {
-        mContext = context;
+    public SharedPreferencesManager() {
         mPreferencesl = mContext.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
     }
 
-    public static SharedPreferencesManager getSharedPreferencesManager(Context context) {
+    public static SharedPreferencesManager getSharedPreferencesManager() {
         if (manager == null) {
             synchronized (SharedPreferencesManager.class) {
                 if (manager == null) {
-                    manager = new SharedPreferencesManager(context);
+                    manager = new SharedPreferencesManager();
                 }
             }
         }

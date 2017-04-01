@@ -34,7 +34,7 @@ public class CollectPresenter extends BasePresenter<CollectView> {
 
     public void setData() {
         mDao = GreenDaoManager.getGreenDaoManager(mContext).getDaoSession().getMyCollectDao();
-        mList = mDao.queryBuilder().build().list();
+        mList = mDao.queryBuilder().where(MyCollectDao.Properties.UserName.eq(userName)).build().list();
         mView = getView();
         if (mView != null) {
             mRecyclerView = mView.getRecyclerView();

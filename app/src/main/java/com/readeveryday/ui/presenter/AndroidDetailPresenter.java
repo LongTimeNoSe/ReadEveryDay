@@ -45,6 +45,7 @@ public class AndroidDetailPresenter extends BasePresenter<AndroidDetailView> {
     private String url;
     private String imageUrl;
     private boolean isCollected;
+    private boolean isLogin;
 
     public AndroidDetailPresenter(Context context) {
         mContext = context;
@@ -69,24 +70,35 @@ public class AndroidDetailPresenter extends BasePresenter<AndroidDetailView> {
         mLoadingView = mView.getLoadingView();
         mWebView = mView.getWebView();
         mCollection = mView.getFloatingActionButton();
-        if (queryAndroidNews() != null && queryAndroidNews().size() > 0) {
-            mCollection.setImageResource(R.drawable.collected);
-            isCollected = true;
-        } else {
-            mCollection.setImageResource(R.drawable.collection);
-            isCollected = false;
+        isLogin = mView.isLogin();
+
+        if (isLogin) {
+            if (queryAndroidNews() != null && queryAndroidNews().size() > 0) {
+                mCollection.setImageResource(R.drawable.collected);
+                isCollected = true;
+            } else {
+                mCollection.setImageResource(R.drawable.collection);
+                isCollected = false;
+            }
         }
+
         mCollection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isCollected) {
-                    mCollection.setImageResource(R.drawable.collection);
-                    deleteAndroidNews();
-                    PromptUtil.toastShowShort(mContext, "取消收藏成功");
+                if (isLogin) {
+                    if (isCollected) {
+                        mCollection.setImageResource(R.drawable.collection);
+                        deleteAndroidNews();
+                        PromptUtil.toastShowShort(mContext, "取消收藏成功");
+                        isCollected = false;
+                    } else {
+                        mCollection.setImageResource(R.drawable.collected);
+                        insertAndroidNews();
+                        PromptUtil.toastShowShort(mContext, "收藏成功");
+                        isCollected = true;
+                    }
                 } else {
-                    mCollection.setImageResource(R.drawable.collected);
-                    insertAndroidNews();
-                    PromptUtil.toastShowShort(mContext, "收藏成功");
+                    mView.toLogin();
                 }
             }
         });
@@ -223,19 +235,19 @@ public class AndroidDetailPresenter extends BasePresenter<AndroidDetailView> {
 
     //数据库增加
     public void insertAndroidNews() {
-        mMyCollect = new MyCollect("", "", title, imageUrl, url, "", Constants.FROMANDROID);
+        mMyCollect = new MyCollect(userName, "", "", title, imageUrl, url, "", Constants.FROMANDROID);
         mDao.insert(mMyCollect);
     }
 
     //数据库查询
     public List<MyCollect> queryAndroidNews() {
-        List<MyCollect> list = mDao.queryBuilder().where(MyCollectDao.Properties.NewsTitle.eq(title)).build().list();
+        List<MyCollect> list = mDao.queryBuilder().where(MyCollectDao.Properties.UserName.eq(userName)).where(MyCollectDao.Properties.NewsTitle.eq(title)).build().list();
         return list;
     }
 
     //数据库删除
     public void deleteAndroidNews() {
-        List<MyCollect> list = mDao.queryBuilder().where(MyCollectDao.Properties.NewsTitle.eq(title)).build().list();
+        List<MyCollect> list = mDao.queryBuilder().where(MyCollectDao.Properties.UserName.eq(userName)).where(MyCollectDao.Properties.NewsTitle.eq(title)).build().list();
         for (MyCollect item : list) {
             mDao.delete(item);
         }

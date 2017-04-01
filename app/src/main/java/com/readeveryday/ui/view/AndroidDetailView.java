@@ -20,4 +20,8 @@ public interface AndroidDetailView {
     //收藏
     FloatingActionButton getFloatingActionButton();
 
+    boolean isLogin();
+
+    void toLogin();
+
 }

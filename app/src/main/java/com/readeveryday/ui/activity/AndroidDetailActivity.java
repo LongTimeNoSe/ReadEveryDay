@@ -34,17 +34,20 @@ public class AndroidDetailActivity extends BaseActivity<AndroidDetailView, Andro
     @BindView(R.id.collection)
     FloatingActionButton mCollection;
 
+    boolean isLogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        isLogin = mSharedPreferences.getBoolean("isLoging", false);
         Intent intent = getIntent();
         if (intent != null) {
             url = intent.getStringExtra("url");
             title = intent.getStringExtra("title");
             imageUrl = intent.getStringExtra("imageUrl");
-            setTitle(title);
-            mPresenter.setData(url, title, imageUrl);
         }
+        setTitle(title);
+        mPresenter.setData(url, title, imageUrl);
 
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -97,6 +100,16 @@ public class AndroidDetailActivity extends BaseActivity<AndroidDetailView, Andro
     }
 
     @Override
+    public boolean isLogin() {
+        return isLogin;
+    }
+
+    @Override
+    public void toLogin() {
+        startActivity(LoginActivity.class);
+    }
+
+    @Override
     public boolean canBack() {
         return true;
     }
@@ -111,5 +124,12 @@ public class AndroidDetailActivity extends BaseActivity<AndroidDetailView, Andro
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_right_menu, menu);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isLogin = mSharedPreferences.getBoolean("isLoging", false);
+        mPresenter.setData(url, title, imageUrl);
     }
 }

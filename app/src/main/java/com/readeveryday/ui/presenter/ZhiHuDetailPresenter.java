@@ -187,19 +187,19 @@ public class ZhiHuDetailPresenter extends BasePresenter<ZhiHuDetailView> {
 
     //数据库增加
     public void insertAndroidNews() {
-        mMyCollect = new MyCollect("", "", newsTitle, newsImageUrl, newsUrl, newsId, Constants.FROMZHIHU);
+        mMyCollect = new MyCollect(userName, "", "", newsTitle, newsImageUrl, newsUrl, newsId, Constants.FROMZHIHU);
         mDao.insert(mMyCollect);
     }
 
     //数据库查询
     public List<MyCollect> queryAndroidNews() {
-        List<MyCollect> list = mDao.queryBuilder().where(MyCollectDao.Properties.NewsTitle.eq(newsTitle)).build().list();
+        List<MyCollect> list = mDao.queryBuilder().where(MyCollectDao.Properties.UserName.eq(userName)).where(MyCollectDao.Properties.NewsTitle.eq(newsTitle)).build().list();
         return list;
     }
 
     //数据库删除
     public void deleteAndroidNews() {
-        List<MyCollect> list = mDao.queryBuilder().where(MyCollectDao.Properties.NewsTitle.eq(newsTitle)).build().list();
+        List<MyCollect> list = mDao.queryBuilder().where(MyCollectDao.Properties.UserName.eq(userName)).where(MyCollectDao.Properties.NewsTitle.eq(newsTitle)).build().list();
         for (MyCollect item : list) {
             mDao.delete(item);
         }

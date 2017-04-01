@@ -1,9 +1,8 @@
 package com.readeveryday.ui.view;
 
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+
+import com.readeveryday.widget.ArcMenu;
 
 /**
  * Created by XuYanping on 2017/3/22.
@@ -11,11 +10,14 @@ import android.widget.RelativeLayout;
 
 public interface MeiZhiDetailView {
 
-    RelativeLayout getParentLayout();
-
     ImageView getImageView();
 
-    CoordinatorLayout getCoordinatorLayout();
+    ArcMenu getMenu();
 
-    FloatingActionButton getFloatingActionButton();
+    ImageView getCollectImage();
+
+    void toLogin();
+
+    boolean isLogin();
+
 }

@@ -2,20 +2,17 @@ package com.readeveryday.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.readeveryday.R;
 import com.readeveryday.ui.base.BaseActivity;
 import com.readeveryday.ui.presenter.MeiZhiDetailPresenter;
 import com.readeveryday.ui.view.MeiZhiDetailView;
-import com.readeveryday.utils.PromptUtil;
 import com.readeveryday.utils.StatusBarUtil;
+import com.readeveryday.widget.ArcMenu;
 
 import butterknife.BindView;
 
@@ -23,29 +20,28 @@ public class MeiZhiDetailActivity extends BaseActivity<MeiZhiDetailView, MeiZhiD
 
     @BindView(R.id.iv_meizhi)
     ImageView mIvMeizhi;
-    @BindView(R.id.fab_down_meizhi)
-    FloatingActionButton mFabDownMeizhi;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.activity_mei_zhi_detail)
-    RelativeLayout mActivityMeiZhiDetail;
-    @BindView(R.id.coordinatorLayout)
-    CoordinatorLayout mCoordinatorLayout;
+    @BindView(R.id.meizhi_detail_edit)
+    ArcMenu mMeizhiDetailEdit;
+    @BindView(R.id.iv_collect_meizhi)
+    ImageView mIvCollectMeizhi;
+
     private String url;
     private String desc;
+    private boolean isLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("妹子哟");
+        isLogin = mSharedPreferences.getBoolean("isLoging", false);
         Intent intent = getIntent();
         if (intent == null) {
             return;
         }
         url = intent.getStringExtra("url");
         desc = intent.getStringExtra("imageDesc");
-        mPresenter.setData(url, desc);
-
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -58,6 +54,14 @@ public class MeiZhiDetailActivity extends BaseActivity<MeiZhiDetailView, MeiZhiD
                 return MeiZhiDetailActivity.super.onOptionsItemSelected(item);
             }
         });
+        mPresenter.setData(url, desc);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isLogin = mSharedPreferences.getBoolean("isLoging", false);
+        mPresenter.setData(url, desc);
     }
 
     @Override
@@ -81,23 +85,28 @@ public class MeiZhiDetailActivity extends BaseActivity<MeiZhiDetailView, MeiZhiD
     }
 
     @Override
-    public RelativeLayout getParentLayout() {
-        return mActivityMeiZhiDetail;
-    }
-
-    @Override
     public ImageView getImageView() {
         return mIvMeizhi;
     }
 
     @Override
-    public CoordinatorLayout getCoordinatorLayout() {
-        return mCoordinatorLayout;
+    public ArcMenu getMenu() {
+        return mMeizhiDetailEdit;
     }
 
     @Override
-    public FloatingActionButton getFloatingActionButton() {
-        return mFabDownMeizhi;
+    public ImageView getCollectImage() {
+        return mIvCollectMeizhi;
+    }
+
+    @Override
+    public void toLogin() {
+        startActivity(LoginActivity.class);
+    }
+
+    @Override
+    public boolean isLogin() {
+        return isLogin;
     }
 
     @Override

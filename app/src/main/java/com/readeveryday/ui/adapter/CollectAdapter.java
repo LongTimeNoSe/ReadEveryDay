@@ -77,7 +77,7 @@ public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             newsViewHolder.BindItem(myCollect.getNewsTitle(), myCollect.getNewsImageUrl(), myCollect.getNewsUrl(), mList.get(position).getNewsId(), mList.get(position).getType());
         } else if (holder instanceof MeiZhiViewHolder) {
             MeiZhiViewHolder meiZhiViewHolder = (MeiZhiViewHolder) holder;
-            meiZhiViewHolder.BindItem(mList.get(position).getMeiZhiImageUrl());
+            meiZhiViewHolder.BindItem(mList.get(position).getMeiZhiImageUrl(),mList.get(position).getMeiZhiImageDesc());
         }
     }
 
@@ -156,7 +156,7 @@ public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mCardCollectMeizhi.setLayoutParams(new LinearLayout.LayoutParams(screenWidth, LinearLayout.LayoutParams.WRAP_CONTENT));
         }
 
-        public void BindItem(final String imageUrl) {
+        public void BindItem(final String imageUrl,final String imageDesc) {
             mTvFrom.setText("来自" + Constants.FROMMEIZHI);
             Log.d("url", imageUrl);
             Glide.with(mContext).load(imageUrl).centerCrop().error(R.drawable.loder_error).into(mIvMeizhi);
@@ -165,6 +165,7 @@ public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, MeiZhiDetailActivity.class);
                     intent.putExtra("url", imageUrl);
+                    intent.putExtra("imageDesc", imageDesc);
                     mContext.startActivity(intent);
                 }
             });

@@ -12,6 +12,7 @@ import org.greenrobot.greendao.annotation.Generated;
 public class MyCollect {
     @Id
     private Long Id;
+    private String userName;
     private String meiZhiImageUrl;
     private String meiZhiImageDesc;
     private String newsTitle;
@@ -20,7 +21,8 @@ public class MyCollect {
     private String newsId;
     private String type;
 
-    public MyCollect(String meiZhiImageUrl, String meiZhiImageDesc, String newsTitle, String newsImageUrl, String newsUrl, String newsId, String type) {
+    public MyCollect(String userName, String meiZhiImageUrl, String meiZhiImageDesc, String newsTitle, String newsImageUrl, String newsUrl, String newsId, String type) {
+        this.userName = userName;
         this.meiZhiImageUrl = meiZhiImageUrl;
         this.meiZhiImageDesc = meiZhiImageDesc;
         this.newsTitle = newsTitle;
@@ -30,9 +32,10 @@ public class MyCollect {
         this.newsId = newsId;
     }
 
-    @Generated(hash = 28034497)
-    public MyCollect(Long Id, String meiZhiImageUrl, String meiZhiImageDesc, String newsTitle, String newsImageUrl, String newsUrl, String newsId, String type) {
+    @Generated(hash = 538266962)
+    public MyCollect(Long Id, String userName, String meiZhiImageUrl, String meiZhiImageDesc, String newsTitle, String newsImageUrl, String newsUrl, String newsId, String type) {
         this.Id = Id;
+        this.userName = userName;
         this.meiZhiImageUrl = meiZhiImageUrl;
         this.meiZhiImageDesc = meiZhiImageDesc;
         this.newsTitle = newsTitle;
@@ -52,6 +55,14 @@ public class MyCollect {
 
     public void setId(Long Id) {
         this.Id = Id;
+    }
+
+    public String getUserName() {
+        return this.userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getMeiZhiImageUrl() {

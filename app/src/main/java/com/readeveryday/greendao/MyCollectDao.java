@@ -23,13 +23,14 @@ public class MyCollectDao extends AbstractDao<MyCollect, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "Id", true, "_id");
-        public final static Property MeiZhiImageUrl = new Property(1, String.class, "meiZhiImageUrl", false, "MEI_ZHI_IMAGE_URL");
-        public final static Property MeiZhiImageDesc = new Property(2, String.class, "meiZhiImageDesc", false, "MEI_ZHI_IMAGE_DESC");
-        public final static Property NewsTitle = new Property(3, String.class, "newsTitle", false, "NEWS_TITLE");
-        public final static Property NewsImageUrl = new Property(4, String.class, "newsImageUrl", false, "NEWS_IMAGE_URL");
-        public final static Property NewsUrl = new Property(5, String.class, "newsUrl", false, "NEWS_URL");
-        public final static Property NewsId = new Property(6, String.class, "newsId", false, "NEWS_ID");
-        public final static Property Type = new Property(7, String.class, "type", false, "TYPE");
+        public final static Property UserName = new Property(1, String.class, "userName", false, "USER_NAME");
+        public final static Property MeiZhiImageUrl = new Property(2, String.class, "meiZhiImageUrl", false, "MEI_ZHI_IMAGE_URL");
+        public final static Property MeiZhiImageDesc = new Property(3, String.class, "meiZhiImageDesc", false, "MEI_ZHI_IMAGE_DESC");
+        public final static Property NewsTitle = new Property(4, String.class, "newsTitle", false, "NEWS_TITLE");
+        public final static Property NewsImageUrl = new Property(5, String.class, "newsImageUrl", false, "NEWS_IMAGE_URL");
+        public final static Property NewsUrl = new Property(6, String.class, "newsUrl", false, "NEWS_URL");
+        public final static Property NewsId = new Property(7, String.class, "newsId", false, "NEWS_ID");
+        public final static Property Type = new Property(8, String.class, "type", false, "TYPE");
     }
 
 
@@ -46,13 +47,14 @@ public class MyCollectDao extends AbstractDao<MyCollect, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"MY_COLLECT\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: Id
-                "\"MEI_ZHI_IMAGE_URL\" TEXT," + // 1: meiZhiImageUrl
-                "\"MEI_ZHI_IMAGE_DESC\" TEXT," + // 2: meiZhiImageDesc
-                "\"NEWS_TITLE\" TEXT," + // 3: newsTitle
-                "\"NEWS_IMAGE_URL\" TEXT," + // 4: newsImageUrl
-                "\"NEWS_URL\" TEXT," + // 5: newsUrl
-                "\"NEWS_ID\" TEXT," + // 6: newsId
-                "\"TYPE\" TEXT);"); // 7: type
+                "\"USER_NAME\" TEXT," + // 1: userName
+                "\"MEI_ZHI_IMAGE_URL\" TEXT," + // 2: meiZhiImageUrl
+                "\"MEI_ZHI_IMAGE_DESC\" TEXT," + // 3: meiZhiImageDesc
+                "\"NEWS_TITLE\" TEXT," + // 4: newsTitle
+                "\"NEWS_IMAGE_URL\" TEXT," + // 5: newsImageUrl
+                "\"NEWS_URL\" TEXT," + // 6: newsUrl
+                "\"NEWS_ID\" TEXT," + // 7: newsId
+                "\"TYPE\" TEXT);"); // 8: type
     }
 
     /** Drops the underlying database table. */
@@ -70,39 +72,44 @@ public class MyCollectDao extends AbstractDao<MyCollect, Long> {
             stmt.bindLong(1, Id);
         }
  
+        String userName = entity.getUserName();
+        if (userName != null) {
+            stmt.bindString(2, userName);
+        }
+ 
         String meiZhiImageUrl = entity.getMeiZhiImageUrl();
         if (meiZhiImageUrl != null) {
-            stmt.bindString(2, meiZhiImageUrl);
+            stmt.bindString(3, meiZhiImageUrl);
         }
  
         String meiZhiImageDesc = entity.getMeiZhiImageDesc();
         if (meiZhiImageDesc != null) {
-            stmt.bindString(3, meiZhiImageDesc);
+            stmt.bindString(4, meiZhiImageDesc);
         }
  
         String newsTitle = entity.getNewsTitle();
         if (newsTitle != null) {
-            stmt.bindString(4, newsTitle);
+            stmt.bindString(5, newsTitle);
         }
  
         String newsImageUrl = entity.getNewsImageUrl();
         if (newsImageUrl != null) {
-            stmt.bindString(5, newsImageUrl);
+            stmt.bindString(6, newsImageUrl);
         }
  
         String newsUrl = entity.getNewsUrl();
         if (newsUrl != null) {
-            stmt.bindString(6, newsUrl);
+            stmt.bindString(7, newsUrl);
         }
  
         String newsId = entity.getNewsId();
         if (newsId != null) {
-            stmt.bindString(7, newsId);
+            stmt.bindString(8, newsId);
         }
  
         String type = entity.getType();
         if (type != null) {
-            stmt.bindString(8, type);
+            stmt.bindString(9, type);
         }
     }
 
@@ -115,39 +122,44 @@ public class MyCollectDao extends AbstractDao<MyCollect, Long> {
             stmt.bindLong(1, Id);
         }
  
+        String userName = entity.getUserName();
+        if (userName != null) {
+            stmt.bindString(2, userName);
+        }
+ 
         String meiZhiImageUrl = entity.getMeiZhiImageUrl();
         if (meiZhiImageUrl != null) {
-            stmt.bindString(2, meiZhiImageUrl);
+            stmt.bindString(3, meiZhiImageUrl);
         }
  
         String meiZhiImageDesc = entity.getMeiZhiImageDesc();
         if (meiZhiImageDesc != null) {
-            stmt.bindString(3, meiZhiImageDesc);
+            stmt.bindString(4, meiZhiImageDesc);
         }
  
         String newsTitle = entity.getNewsTitle();
         if (newsTitle != null) {
-            stmt.bindString(4, newsTitle);
+            stmt.bindString(5, newsTitle);
         }
  
         String newsImageUrl = entity.getNewsImageUrl();
         if (newsImageUrl != null) {
-            stmt.bindString(5, newsImageUrl);
+            stmt.bindString(6, newsImageUrl);
         }
  
         String newsUrl = entity.getNewsUrl();
         if (newsUrl != null) {
-            stmt.bindString(6, newsUrl);
+            stmt.bindString(7, newsUrl);
         }
  
         String newsId = entity.getNewsId();
         if (newsId != null) {
-            stmt.bindString(7, newsId);
+            stmt.bindString(8, newsId);
         }
  
         String type = entity.getType();
         if (type != null) {
-            stmt.bindString(8, type);
+            stmt.bindString(9, type);
         }
     }
 
@@ -160,13 +172,14 @@ public class MyCollectDao extends AbstractDao<MyCollect, Long> {
     public MyCollect readEntity(Cursor cursor, int offset) {
         MyCollect entity = new MyCollect( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // Id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // meiZhiImageUrl
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // meiZhiImageDesc
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // newsTitle
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // newsImageUrl
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // newsUrl
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // newsId
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7) // type
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // userName
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // meiZhiImageUrl
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // meiZhiImageDesc
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // newsTitle
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // newsImageUrl
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // newsUrl
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // newsId
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8) // type
         );
         return entity;
     }
@@ -174,13 +187,14 @@ public class MyCollectDao extends AbstractDao<MyCollect, Long> {
     @Override
     public void readEntity(Cursor cursor, MyCollect entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setMeiZhiImageUrl(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setMeiZhiImageDesc(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setNewsTitle(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setNewsImageUrl(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setNewsUrl(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setNewsId(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setType(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setUserName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setMeiZhiImageUrl(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setMeiZhiImageDesc(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setNewsTitle(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setNewsImageUrl(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setNewsUrl(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setNewsId(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setType(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
      }
     
     @Override
