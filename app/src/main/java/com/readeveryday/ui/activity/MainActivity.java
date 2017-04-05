@@ -80,7 +80,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //        mFragmentList.add(new GankFragment());
         mFragmentList.add(new MeiZhiFragment());
         mFragmentList.add(new AndroidFragment());
-        mContentViewPager.setOffscreenPageLimit(3);//设置至少3个fragment，防止重复创建和销毁，造成内存溢出
+        mContentViewPager.setOffscreenPageLimit(3);
         mContentViewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), mFragmentList, "main_view_pager"));
         mTabLayout.setupWithViewPager(mContentViewPager);
     }
@@ -126,7 +126,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.nav_about_me:
 //                PromptUtil.snackbarShow(mActivityMain, "关于我");
                 startActivity(AboutMeActivity.class);
-                this.finish();
+//                this.finish();
                 break;
             case R.id.nav_about_read_everyday:
 //                PromptUtil.snackbarShow(mActivityMain, "关于ReadEveryDay");
