@@ -71,4 +71,6 @@ dependencies {
     compile 'org.greenrobot:greendao:3.2.0'
     //友盟统计
     compile 'com.umeng.analytics:analytics:latest.integration'
+    //轮播图 https://github.com/youth5201314/banner
+    compile 'com.youth.banner:banner:1.4.9'
 }

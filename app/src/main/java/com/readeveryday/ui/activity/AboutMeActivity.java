@@ -1,6 +1,5 @@
 package com.readeveryday.ui.activity;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;

@@ -2,6 +2,7 @@ package com.readeveryday.ui.presenter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -11,6 +12,7 @@ import com.readeveryday.manager.GreenDaoManager;
 import com.readeveryday.ui.adapter.CollectAdapter;
 import com.readeveryday.ui.base.BasePresenter;
 import com.readeveryday.ui.view.CollectView;
+import com.readeveryday.utils.SimpleItemTouchHelperCallback;
 
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class CollectPresenter extends BasePresenter<CollectView> {
     private List<MyCollect> mList;
     private MyCollectDao mDao;
     private RelativeLayout mNoData;
+    private SimpleItemTouchHelperCallback mCallback;
 
     public CollectPresenter(Context context) {
         mContext = context;
@@ -39,6 +42,7 @@ public class CollectPresenter extends BasePresenter<CollectView> {
         if (mView != null) {
             mRecyclerView = mView.getRecyclerView();
             mNoData = mView.getNoData();
+
             if (mList == null) {
                 return;
             }
@@ -48,9 +52,10 @@ public class CollectPresenter extends BasePresenter<CollectView> {
             } else {
                 mAdapter = new CollectAdapter(mContext, mList);
                 mRecyclerView.setAdapter(mAdapter);
-                mAdapter.notifyDataSetChanged();
+                mCallback = new SimpleItemTouchHelperCallback(mAdapter);
+                ItemTouchHelper helper = new ItemTouchHelper(mCallback);
+                helper.attachToRecyclerView(mRecyclerView);
             }
-
         }
     }
 }
