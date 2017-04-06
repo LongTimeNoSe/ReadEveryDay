@@ -16,12 +16,9 @@ import com.bumptech.glide.Glide;
 import com.readeveryday.Constants;
 import com.readeveryday.R;
 import com.readeveryday.greendao.MyCollect;
-import com.readeveryday.greendao.MyCollectDao;
-import com.readeveryday.manager.GreenDaoManager;
 import com.readeveryday.ui.activity.AndroidDetailActivity;
 import com.readeveryday.ui.activity.MeiZhiDetailActivity;
 import com.readeveryday.ui.activity.ZhiHuDetailActivity;
-import com.readeveryday.utils.MyItemTouchHelper;
 import com.readeveryday.utils.ScreenUtil;
 
 import java.util.List;
@@ -29,28 +26,22 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.readeveryday.ui.base.BasePresenter.userName;
-
 /**
  * Created by XuYanping on 2017/3/24.
  */
 
-public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements MyItemTouchHelper {
+public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private Context mContext;
     private List<MyCollect> mList;
     private ScreenUtil screenUtil;
     private int screenWidth;
 
-    private MyCollectDao mDao;
-    private MyCollect mMyCollect;
-
     public CollectAdapter(Context context, List<MyCollect> list) {
         mContext = context;
         mList = list;
         screenUtil = ScreenUtil.instance(context);
         screenWidth = screenUtil.getScreenWidth();
-        mDao = GreenDaoManager.getGreenDaoManager(mContext).getDaoSession().getMyCollectDao();
     }
 
     @Override
@@ -66,10 +57,10 @@ public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == Constants.TYPE_MEIZHI) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_collect_meizhi, null);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_collect_meizhi, parent, false);
             return new MeiZhiViewHolder(view);
         } else if (viewType == Constants.TYPE_NEWS) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_collect_news, null);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_collect_news, parent, false);
             return new NewsViewHolder(view);
         } else {
             return null;
@@ -93,19 +84,6 @@ public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public int getItemCount() {
         return mList.size();
-    }
-
-//    @Override
-//    public void onItemMove(int fromPosition, int toPosition) {
-//        Collections.swap(mList, fromPosition, toPosition);
-//        notifyItemMoved(fromPosition, toPosition);
-//    }
-
-    @Override
-    public void onItemDissmiss(int position) {
-        mList.remove(position);
-        notifyItemRemoved(position);
-        deleteAndroidNews(mList.get(position).getNewsTitle());
     }
 
 
@@ -191,14 +169,6 @@ public class CollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     mContext.startActivity(intent);
                 }
             });
-        }
-    }
-
-    //数据库删除
-    public void deleteAndroidNews(String str) {
-        List<MyCollect> list = mDao.queryBuilder().where(MyCollectDao.Properties.UserName.eq(userName)).where(MyCollectDao.Properties.NewsTitle.eq(str)).build().list();
-        for (MyCollect item : list) {
-            mDao.delete(item);
         }
     }
 }
