@@ -1,11 +1,15 @@
 package com.readeveryday.ui.presenter;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.readeveryday.Constants;
 import com.readeveryday.greendao.MyCollect;
 import com.readeveryday.greendao.MyCollectDao;
 import com.readeveryday.manager.GreenDaoManager;
@@ -26,12 +30,38 @@ public class CollectPresenter extends BasePresenter<CollectView> {
     private Context mContext;
     private CollectView mView;
     private RecyclerView mRecyclerView;
+    private LinearLayout mParentLayout;
     private CollectAdapter mAdapter;
     private List<MyCollect> mList;
     private MyCollectDao mDao;
     private RelativeLayout mNoData;
     private MyItemTouchHelper mHelper;
     private SimpleItemTouchHelperCallback mCallback;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case Constants.STATE_ZERO:
+                    int position = msg.arg1;
+                    if (mList.get(position).getMeiZhiImageDesc() != null) {
+                        deleteMeiZhi(mList.get(position).getMeiZhiImageDesc());
+                    } else if (mList.get(position).getNewsTitle() != null) {
+                        deleteNews(mList.get(position).getNewsTitle());
+                    }
+                    mList.remove(position);
+                    mAdapter.notifyItemRemoved(position);
+//                    mList.clear();
+//                    mList.addAll(mDao.queryBuilder().where(MyCollectDao.Properties.UserName.eq(userName)).build().list());
+//                    mRecyclerView.setAdapter(mAdapter);
+//                    mAdapter.notifyDataSetChanged();
+                    setData();
+
+                    break;
+            }
+        }
+    };
 
     public CollectPresenter(Context context) {
         mContext = context;
@@ -44,7 +74,8 @@ public class CollectPresenter extends BasePresenter<CollectView> {
         if (mView != null) {
             mRecyclerView = mView.getRecyclerView();
             mNoData = mView.getNoData();
-
+            mParentLayout = mView.getParentLayout();
+            mRecyclerView.setHasFixedSize(true);
             if (mList == null) {
                 return;
             }
@@ -58,11 +89,11 @@ public class CollectPresenter extends BasePresenter<CollectView> {
                     @Override
                     public void onItemDissmiss(int position) {
 
-                        deleteAndroidNews(mList.get(position).getNewsTitle());
-                        mList.remove(position);
-                        mAdapter.notifyItemRemoved(position);
-//                        mAdapter.notifyDataSetChanged();
-                        setData();
+                        Message message = new Message();
+                        message.what = Constants.STATE_ZERO;
+                        message.arg1 = position;
+                        mHandler.sendMessage(message);
+
                     }
                 };
                 mCallback = new SimpleItemTouchHelperCallback(mHelper);
@@ -73,8 +104,15 @@ public class CollectPresenter extends BasePresenter<CollectView> {
     }
 
     //数据库删除
-    public void deleteAndroidNews(String str) {
+    public void deleteNews(String str) {
         List<MyCollect> list = mDao.queryBuilder().where(MyCollectDao.Properties.UserName.eq(userName)).where(MyCollectDao.Properties.NewsTitle.eq(str)).build().list();
+        for (MyCollect item : list) {
+            mDao.delete(item);
+        }
+    }
+
+    public void deleteMeiZhi(String str) {
+        List<MyCollect> list = mDao.queryBuilder().where(MyCollectDao.Properties.UserName.eq(userName)).where(MyCollectDao.Properties.MeiZhiImageDesc.eq(str)).build().list();
         for (MyCollect item : list) {
             mDao.delete(item);
         }

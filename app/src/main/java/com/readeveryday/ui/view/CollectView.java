@@ -2,6 +2,7 @@ package com.readeveryday.ui.view;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 /**
@@ -9,6 +10,8 @@ import android.widget.RelativeLayout;
  */
 
 public interface CollectView {
+
+    LinearLayout getParentLayout();
 
     RecyclerView getRecyclerView();
 

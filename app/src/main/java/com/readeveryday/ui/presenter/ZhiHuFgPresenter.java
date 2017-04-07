@@ -4,20 +4,16 @@ import android.content.Context;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.AndroidCharacter;
 import android.util.Log;
 
-import com.readeveryday.api.ZhiHuApi;
 import com.readeveryday.bean.zhihu.NewsTimeLine;
 import com.readeveryday.ui.adapter.ZhiHuAdapter;
 import com.readeveryday.ui.base.BasePresenter;
 import com.readeveryday.ui.view.ZhiHuFgView;
 import com.readeveryday.utils.PromptUtil;
 
-import rx.Scheduler;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.observers.SafeSubscriber;
 import rx.schedulers.Schedulers;
 
 /**
@@ -44,10 +40,7 @@ public class ZhiHuFgPresenter extends BasePresenter<ZhiHuFgView> {
         if (mZhiHuFgView != null) {
             mRecyclerView = mZhiHuFgView.getRecyclerView();
             mLayoutManager = mZhiHuFgView.getLayoutManager();
-            zhihuApi.getLatestNews()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Subscriber<NewsTimeLine>() {
+            zhihuApi.getLatestNews().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<NewsTimeLine>() {
                 @Override
                 public void onCompleted() {
 
@@ -77,6 +70,7 @@ public class ZhiHuFgPresenter extends BasePresenter<ZhiHuFgView> {
                 view.setDataRefresh(false);
                 return;
             } else {
+                mTimeLine.getStories().clear();
                 mTimeLine.getStories().addAll(line.getStories());
             }
             mAdapter.notifyDataSetChanged();

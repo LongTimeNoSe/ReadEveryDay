@@ -114,7 +114,6 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         List<String> imageList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
 
-        final List<ImageView> imageViewList = new ArrayList<ImageView>();
 
         public TopViewHolder(View itemView) {
             super(itemView);
