@@ -21,6 +21,12 @@ import com.readeveryday.utils.SimpleItemTouchHelperCallback;
 
 import java.util.List;
 
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
+
 /**
  * Created by XuYanping on 2017/3/24.
  */
@@ -45,9 +51,9 @@ public class CollectPresenter extends BasePresenter<CollectView> {
             switch (msg.what) {
                 case Constants.STATE_ZERO:
                     int position = msg.arg1;
-                    if (mList.get(position).getMeiZhiImageDesc() != null) {
+                    if (!mList.get(position).getMeiZhiImageDesc().equals("")) {
                         deleteMeiZhi(mList.get(position).getMeiZhiImageDesc());
-                    } else if (mList.get(position).getNewsTitle() != null) {
+                    } else if (!mList.get(position).getNewsTitle().toString().equals("")) {
                         deleteNews(mList.get(position).getNewsTitle());
                     }
                     mList.remove(position);
@@ -87,12 +93,36 @@ public class CollectPresenter extends BasePresenter<CollectView> {
                 mRecyclerView.setAdapter(mAdapter);
                 mHelper = new MyItemTouchHelper() {
                     @Override
-                    public void onItemDissmiss(int position) {
+                    public void onItemDissmiss(final int position) {
 
-                        Message message = new Message();
-                        message.what = Constants.STATE_ZERO;
-                        message.arg1 = position;
-                        mHandler.sendMessage(message);
+//                        Message message = new Message();
+//                        message.what = Constants.STATE_ZERO;
+//                        message.arg1 = position;
+//                        mHandler.sendMessage(message);
+                        Observable.create(new Observable.OnSubscribe<MyCollect>() {
+
+
+                            @Override
+                            public void call(Subscriber<? super MyCollect> subscriber) {
+
+                                subscriber.onNext(mList.get(position));
+
+                            }
+                        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<MyCollect>() {
+                            @Override
+                            public void call(MyCollect collect) {
+                                if (!collect.getMeiZhiImageDesc().equals("")) {
+                                    deleteMeiZhi(collect.getMeiZhiImageDesc());
+                                } else if (!collect.getNewsTitle().toString().equals("")) {
+                                    deleteNews(collect.getNewsTitle());
+                                }
+                                mList.remove(position);
+                                mAdapter.notifyItemRemoved(position);
+                                setData();
+//                                mAdapter.notifyDataSetChanged();
+                            }
+                        });
+
 
                     }
                 };
