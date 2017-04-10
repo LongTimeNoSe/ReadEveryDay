@@ -20,11 +20,6 @@ import android.widget.ImageView;
 
 import com.readeveryday.R;
 
-/**
- * author：peixianzhong.
- * date：2016/11/30 11:55.
- * function：圆形头像框
- */
 public class CircleImageView extends ImageView {
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;
     private static final Bitmap.Config BITMAP_CONFIG = Bitmap.Config.ARGB_8888;
