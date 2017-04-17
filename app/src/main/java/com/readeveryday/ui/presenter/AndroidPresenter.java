@@ -48,12 +48,13 @@ public class AndroidPresenter extends BasePresenter<AndroidView> {
             androidApi.getAndroidList(page).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<AndroidList>() {
                 @Override
                 public void onCompleted() {
-
+                    mAndroidView.setDataRefresh(false);
                 }
 
                 @Override
                 public void onError(Throwable e) {
                     PromptUtil.toastShowShort(mContext, "网络不见了~");
+                    mAndroidView.setDataRefresh(false);
                 }
 
                 @Override

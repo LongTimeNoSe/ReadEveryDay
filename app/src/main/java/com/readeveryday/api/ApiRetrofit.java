@@ -76,7 +76,8 @@ public class ApiRetrofit {
 
             CacheControl.Builder builder = new CacheControl.Builder();
             //这个是控制缓存的最大生命时间   maxAge设置为0，不会取缓存，直接走网络。
-            builder.maxAge(0, TimeUnit.SECONDS);
+            //此处设置缓存时间为一小时
+            builder.maxAge(1, TimeUnit.HOURS);
             //这个是控制缓存的过时时间
             builder.maxStale(365, TimeUnit.DAYS);
 

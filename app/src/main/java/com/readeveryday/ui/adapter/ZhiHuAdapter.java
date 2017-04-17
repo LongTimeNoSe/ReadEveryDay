@@ -122,6 +122,10 @@ public class ZhiHuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         public void bindView(final List<TopStories> stories) {
 
+            newsId.clear();
+            imageList.clear();
+            titleList.clear();
+
             for (int i = 0; i < stories.size(); i++) {
                 newsId.add(stories.get(i).getId());
                 imageList.add(stories.get(i).getImage());

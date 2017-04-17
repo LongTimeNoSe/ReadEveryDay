@@ -11,9 +11,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.readeveryday.R;
 import com.readeveryday.bean.gank.Gank;
-import com.readeveryday.greendao.MyCollect;
-import com.readeveryday.greendao.MyCollectDao;
-import com.readeveryday.manager.GreenDaoManager;
 import com.readeveryday.ui.activity.MeiZhiDetailActivity;
 
 import java.util.List;
@@ -29,13 +26,10 @@ public class MeiZhiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private Context mContext;
     private List<Gank> mList;
-    private MyCollectDao mDao;
-    private MyCollect mMyCollect;
 
     public MeiZhiAdapter(Context context, List<Gank> list) {
         mContext = context;
         mList = list;
-        mDao = GreenDaoManager.getGreenDaoManager(mContext).getDaoSession().getMyCollectDao();
     }
 
     @Override

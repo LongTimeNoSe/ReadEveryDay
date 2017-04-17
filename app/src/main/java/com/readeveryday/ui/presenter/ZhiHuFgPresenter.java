@@ -43,13 +43,14 @@ public class ZhiHuFgPresenter extends BasePresenter<ZhiHuFgView> {
             zhihuApi.getLatestNews().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<NewsTimeLine>() {
                 @Override
                 public void onCompleted() {
-
+                    mZhiHuFgView.setDataRefresh(false);
                 }
 
                 @Override
                 public void onError(Throwable e) {
                     Log.d("e", e.toString());
                     PromptUtil.toastShowShort(mContext, "网络不见了~");
+                    mZhiHuFgView.setDataRefresh(false);
                 }
 
                 @Override
