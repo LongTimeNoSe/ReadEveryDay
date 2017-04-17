@@ -26,7 +26,7 @@ public class MyApplication extends Application {
         //ShareSDK分享
         ShareSDK.initSDK(mContext);
         //友盟统计
-        boolean isRelase = false;
+        boolean isRelase = true;
         if (isRelase) {
             MobclickAgent.setDebugMode(true);
             // SDK在统计Fragment时，需要关闭Activity自带的页面统计，
