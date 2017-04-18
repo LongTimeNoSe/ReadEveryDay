@@ -136,9 +136,7 @@ public class ZhiHuDetailPresenter extends BasePresenter<ZhiHuDetailView> {
     private void setDatas(News news) {
 
         url = news.getShare_url();
-        String head = "<head>\n" +
-                "\t<link rel=\"stylesheet\" href=\"" + news.getCss()[0] + "\"/>\n" +
-                "</head>";
+        String head = "<head>\n" + "\t<link rel=\"stylesheet\" href=\"" + news.getCss()[0] + "\"/>\n" + "</head>";
         String img = "<div class=\"headline\">";
         newsUrl = head + news.getBody().replace(img, " ");
         mWebView.loadDataWithBaseURL(null, newsUrl, "text/html", "utf-8", null);
@@ -217,24 +215,6 @@ public class ZhiHuDetailPresenter extends BasePresenter<ZhiHuDetailView> {
         share.setSite(mContext.getString(R.string.app_name));
         share.setSiteUrl(newsUrl);
         share.show(mContext);
-
-//        share.setTitle("我是分享标题");
-//        // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
-//        share.setTitleUrl("https://www.baidu.com");
-//        // text是分享文本，所有平台都需要这个字段
-//        share.setText("我是分享内容");
-//        // url仅在微信（包括好友和朋友圈）中使用
-//        share.setUrl("http://mob.com ");
-//        share.setImageUrl("https://f1.webshare.mob.com/code/demo/img/1.jpg");
-//        share.setComment("我是测试评论文本");
-//        // site是分享此内容的网站名称，仅在QQ空间使用
-//        share.setSite(mContext.getString(R.string.app_name));
-//
-//        // siteUrl是分享此内容的网站地址，仅在QQ空间使用
-//        share.setSiteUrl("http://www.baidu.com");
-//
-//        // 启动分享GUI
-//        share.show(mContext);
 
     }
 }
