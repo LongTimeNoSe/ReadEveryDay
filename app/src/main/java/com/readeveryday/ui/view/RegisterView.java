@@ -21,4 +21,6 @@ public interface RegisterView {
     ImageView getBack();
 
     void finishActivity();
+
+    void returnLogin();
 }

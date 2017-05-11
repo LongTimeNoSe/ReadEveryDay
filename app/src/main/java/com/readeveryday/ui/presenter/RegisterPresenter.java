@@ -76,7 +76,10 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
                 @Override
                 public void done(UserInfo info, BmobException e) {
                     if (e == null) {
-                        PromptUtil.toastShowShort(mContext, "注册成功" + info.toString());
+                        PromptUtil.toastShowShort(mContext, "注册成功");
+                        mView.returnLogin();
+                        mView.finishActivity();
+
                     } else {
                         PromptUtil.toastShowShort(mContext, "注册失败" + e.getMessage());
                     }

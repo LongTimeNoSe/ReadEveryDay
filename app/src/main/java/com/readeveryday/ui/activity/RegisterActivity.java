@@ -1,5 +1,6 @@
 package com.readeveryday.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
@@ -78,6 +79,11 @@ public class RegisterActivity extends BaseActivity<RegisterView, RegisterPresent
     @Override
     public void finishActivity() {
         RegisterActivity.this.finish();
+    }
+
+    @Override
+    public void returnLogin() {
+        startActivity(new Intent(this, LoginActivity.class));
     }
 
     @Override
