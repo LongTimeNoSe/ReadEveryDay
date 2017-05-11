@@ -18,7 +18,7 @@ public interface LoginView {
 
     Button register();
 
-    void loginSuccess();
+    void finishActivity();
 
     void toRegister();
 

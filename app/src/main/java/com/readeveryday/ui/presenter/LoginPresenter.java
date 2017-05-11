@@ -75,7 +75,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                         mEditor.putString("psw", userName);
                         mEditor.putBoolean("isLoging", true);
                         mEditor.apply();
-                        mView.loginSuccess();
+                        mView.finishActivity();
                     } else {
                         PromptUtil.toastShowShort(mContext, "账号或密码错误" + e.getMessage());
                     }
@@ -88,6 +88,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         @Override
         public void onClick(View v) {
             mView.toRegister();
+            mView.finishActivity();
         }
     };
 }

@@ -72,7 +72,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     }
 
     @Override
-    public void loginSuccess() {
+    public void finishActivity() {
         LoginActivity.this.finish();
     }
 
