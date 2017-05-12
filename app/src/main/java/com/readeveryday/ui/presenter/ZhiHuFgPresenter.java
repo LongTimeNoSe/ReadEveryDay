@@ -128,15 +128,18 @@ public class ZhiHuFgPresenter extends BasePresenter<ZhiHuFgView> {
                 @Override
                 public void onCompleted() {
                     Log.d("e", "completed");
+                    mZhiHuFgView.setDataRefresh(false);
                 }
 
                 @Override
                 public void onError(Throwable e) {
-                    PromptUtil.toastShowShort(mContext, "网络不见了~");
+//                    PromptUtil.toastShowShort(mContext, "网络不见了~");
+                    PromptUtil.toastShowShort(mContext, e.getMessage());
                 }
 
                 @Override
                 public void onNext(NewsTimeLine line) {
+                    Log.d("line", line.toString());
                     setData(mContext, line, mZhiHuFgView, mRecyclerView);
                 }
             });
