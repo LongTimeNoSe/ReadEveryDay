@@ -47,6 +47,7 @@
         android:drawableLeft="@drawable/password"
         android:drawablePadding="20dp"
         android:hint="请输入密码"
+        android:inputType="textPassword"
         android:paddingLeft="10dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
