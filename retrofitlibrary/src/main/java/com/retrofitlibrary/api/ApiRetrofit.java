@@ -1,4 +1,4 @@
-package com.readeveryday.api;
+package com.retrofitlibrary.api.util;
 
 import android.text.TextUtils;
 import android.util.Log;

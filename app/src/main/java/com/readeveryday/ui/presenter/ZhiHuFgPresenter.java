@@ -49,7 +49,11 @@ public class ZhiHuFgPresenter extends BasePresenter<ZhiHuFgView> {
                 @Override
                 public void onError(Throwable e) {
                     Log.d("e", e.toString());
-                    PromptUtil.toastShowShort(mContext, "网络不见了~");
+//                    PromptUtil.toastShowShort(mContext, "网络不见了~");
+//                    PromptUtil.toastShowShort(mContext, e.toString());
+                    if (e.toString().contains("404")) {
+                        PromptUtil.toastShowShort(mContext, "讶，404啦");
+                    }
                     mZhiHuFgView.setDataRefresh(false);
                 }
 

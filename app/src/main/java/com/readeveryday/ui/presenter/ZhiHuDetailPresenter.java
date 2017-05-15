@@ -123,7 +123,7 @@ public class ZhiHuDetailPresenter extends BasePresenter<ZhiHuDetailView> {
 
             @Override
             public void onError(Throwable e) {
-
+                PromptUtil.toastShowShort(mContext, e.toString());
             }
 
             @Override

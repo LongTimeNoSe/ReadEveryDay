@@ -53,7 +53,7 @@ public class AndroidPresenter extends BasePresenter<AndroidView> {
 
                 @Override
                 public void onError(Throwable e) {
-                    PromptUtil.toastShowShort(mContext, "网络不见了~");
+                    PromptUtil.toastShowShort(mContext, e.toString());
                     mAndroidView.setDataRefresh(false);
                 }
 

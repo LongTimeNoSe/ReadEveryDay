@@ -58,6 +58,7 @@ public class MeiZhiPresenter extends BasePresenter<MeiZhiView> {
                 @Override
                 public void onError(Throwable e) {
                     mView.setDataRefresh(false);
+                    PromptUtil.toastShowShort(mContext, e.toString());
                 }
 
                 @Override
