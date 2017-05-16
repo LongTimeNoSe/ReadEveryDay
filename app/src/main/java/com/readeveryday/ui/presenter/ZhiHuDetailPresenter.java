@@ -123,7 +123,11 @@ public class ZhiHuDetailPresenter extends BasePresenter<ZhiHuDetailView> {
 
             @Override
             public void onError(Throwable e) {
-                PromptUtil.toastShowShort(mContext, e.toString());
+                if (e.toString().contains("404")) {
+                    PromptUtil.toastShowShort(mContext, "讶，404啦");
+                }else{
+                    PromptUtil.toastShowShort(mContext, e.toString());
+                }
             }
 
             @Override
