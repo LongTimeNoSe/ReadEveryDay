@@ -3,6 +3,7 @@ package com.readeveryday.ui.activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -133,5 +134,15 @@ public class AboutMeActivity extends BaseActivity {
     @Override
     public String getActivityTag() {
         return "AboutMeActivity";
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == event.KEYCODE_BACK) {
+            startActivity(MainActivity.class);
+            AboutMeActivity.this.finish();
+        }
+        return false;
     }
 }

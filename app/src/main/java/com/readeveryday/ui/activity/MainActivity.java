@@ -126,7 +126,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.nav_about_me:
 //                PromptUtil.snackbarShow(mActivityMain, "关于我");
                 startActivity(AboutMeActivity.class);
-//                this.finish();
+                this.finish();
                 break;
             case R.id.nav_about_read_everyday:
 //                PromptUtil.snackbarShow(mActivityMain, "关于ReadEveryDay");
