@@ -52,7 +52,7 @@ public class ZhiHuFgPresenter extends BasePresenter<ZhiHuFgView> {
 //
                     if (e.toString().contains("404")) {
                         PromptUtil.toastShowShort(mContext, "讶，404啦");
-                    }else{
+                    } else {
                         PromptUtil.toastShowShort(mContext, e.toString());
                     }
                     mZhiHuFgView.setDataRefresh(false);
@@ -68,7 +68,7 @@ public class ZhiHuFgPresenter extends BasePresenter<ZhiHuFgView> {
 
     String time;
 
-    private void setData(Context context, NewsTimeLine line, ZhiHuFgView view, RecyclerView recyclerView) {
+    private void setData(Context context, NewsTimeLine line, final ZhiHuFgView view, RecyclerView recyclerView) {
 
         if (isLoadMore) {
             if (time == null) {
@@ -76,17 +76,17 @@ public class ZhiHuFgPresenter extends BasePresenter<ZhiHuFgView> {
                 view.setDataRefresh(false);
                 return;
             } else {
-                mTimeLine.getStories().clear();
                 mTimeLine.getStories().addAll(line.getStories());
             }
             mAdapter.notifyDataSetChanged();
+            view.setDataRefresh(false);
         } else {
             mTimeLine = line;
             mAdapter = new ZhiHuAdapter(context, mTimeLine);
             recyclerView.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
         }
-        view.setDataRefresh(false);
+
         time = line.getDate();
     }
 
@@ -146,6 +146,7 @@ public class ZhiHuFgPresenter extends BasePresenter<ZhiHuFgView> {
                 public void onNext(NewsTimeLine line) {
                     Log.d("line", line.toString());
                     setData(mContext, line, mZhiHuFgView, mRecyclerView);
+
                 }
             });
         }
