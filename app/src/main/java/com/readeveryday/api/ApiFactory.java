@@ -41,8 +41,8 @@ public class ApiFactory {
     }
 
     public static AndroidApi getAndroidSingleton() {
-        synchronized (monitor){
-            if (androidSingleton == null){
+        synchronized (monitor) {
+            if (androidSingleton == null) {
                 androidSingleton = new ApiRetrofit().getAndroidApiServer();
             }
         }

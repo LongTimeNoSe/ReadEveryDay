@@ -40,6 +40,8 @@ public class ZhiHuFgPresenter extends BasePresenter<ZhiHuFgView> {
         if (mZhiHuFgView != null) {
             mRecyclerView = mZhiHuFgView.getRecyclerView();
             mLayoutManager = mZhiHuFgView.getLayoutManager();
+
+
             zhihuApi.getLatestNews().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<NewsTimeLine>() {
                 @Override
                 public void onCompleted() {

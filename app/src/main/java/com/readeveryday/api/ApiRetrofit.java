@@ -33,10 +33,12 @@ public class ApiRetrofit {
     public DailyApi DailyApiServer;
     public AndroidApi AndroidApiServer;
 
+
     public static final String ZHIHU_BASE_URL = "http://news-at.zhihu.com/api/4/";
     public static final String GANK_BASE_URL = "http://gank.io/api/";
     public static final String ANDROID_BASE_URL = "http://gank.io/api/data/Android/10/";
     public static final String DAILY_BASE_URL = "http://app3.qdaily.com/app3/";
+    public static final String LOGIN_BASE_URL = "http://192.168.0.9:8080/";
 
     public ZhiHuApi getZhuHuApiServer() {
         return ZhuHuApiServer;
@@ -84,6 +86,7 @@ public class ApiRetrofit {
         Retrofit retrofit_gank = new Retrofit.Builder().baseUrl(GANK_BASE_URL).client(client.build()).addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
         Retrofit retrofit_daily = new Retrofit.Builder().baseUrl(DAILY_BASE_URL).client(client.build()).addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
         Retrofit retrofit_android = new Retrofit.Builder().baseUrl(ANDROID_BASE_URL).client(client.build()).addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
+        Retrofit retrofit_login = new Retrofit.Builder().baseUrl(LOGIN_BASE_URL).client(client.build()).addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
 
         ZhuHuApiServer = retrofit_zhihu.create(ZhiHuApi.class);
         GankApiServer = retrofit_gank.create(GankApi.class);
@@ -122,7 +125,7 @@ public class ApiRetrofit {
                 int maxStale = 60 * 60 * 24 * 28; // tolerate 4-weeks stale
                 return originalResponse.newBuilder().removeHeader("Pragma").header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale).build();
             }
-        }
+         }
     }
 
 //    //拦截器

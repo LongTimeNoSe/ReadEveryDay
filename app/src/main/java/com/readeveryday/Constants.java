@@ -12,8 +12,6 @@ public class Constants {
     public static final String FROMZHIHU = "ZhiHu";
     public static final int TYPE_MEIZHI = 1;
     public static final int TYPE_NEWS = 2;
-    public static final int TYPE_NODATA = -1;
-    public static final int INTENT_STATE_ONE = 1;
     public static final int STATE_ZERO = 0;
 
 }

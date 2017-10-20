@@ -140,7 +140,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     }
 
     //绑定子Activity的Presenter
-    protected abstract T createPresenter();
+    protected abstract T    createPresenter();
 
     //绑定子Activity的布局文件
     protected abstract int createViewLayoutId();
