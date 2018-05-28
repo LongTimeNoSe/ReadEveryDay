@@ -14,7 +14,7 @@ import com.readeveryday.greendao.MyCollect;
 import com.readeveryday.greendao.MyCollectDao;
 import com.readeveryday.manager.GreenDaoManager;
 import com.readeveryday.ui.adapter.CollectAdapter;
-import com.readeveryday.ui.base.BasePresenter;
+import com.readeveryday.base.BasePresenter;
 import com.readeveryday.ui.view.CollectView;
 import com.readeveryday.utils.MyItemTouchHelper;
 import com.readeveryday.utils.SimpleItemTouchHelperCallback;

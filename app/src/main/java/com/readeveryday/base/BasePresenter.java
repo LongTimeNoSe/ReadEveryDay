@@ -1,4 +1,4 @@
-package com.readeveryday.ui.base;
+package com.readeveryday.base;
 
 import com.readeveryday.api.AndroidApi;
 import com.readeveryday.api.ApiFactory;
@@ -14,7 +14,7 @@ import java.lang.ref.WeakReference;
  * Created by XuYanping on 2017/3/15.
  */
 
-public abstract class BasePresenter<V> {
+public class BasePresenter<V> {
 
     protected Reference<V> mReference;
 

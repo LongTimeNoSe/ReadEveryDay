@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.readeveryday.R;
-import com.readeveryday.ui.base.BaseActivity;
+import com.readeveryday.base.BaseActivity;
 import com.readeveryday.ui.presenter.RegisterPresenter;
 import com.readeveryday.ui.view.RegisterView;
 import com.readeveryday.utils.StatusBarUtil;

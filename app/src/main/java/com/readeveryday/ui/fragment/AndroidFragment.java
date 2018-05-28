@@ -2,7 +2,6 @@ package com.readeveryday.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.readeveryday.R;
-import com.readeveryday.ui.base.BaseFragment;
+import com.readeveryday.base.BaseFragment;
 import com.readeveryday.ui.presenter.AndroidPresenter;
 import com.readeveryday.ui.view.AndroidView;
 

@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.readeveryday.R;
-import com.readeveryday.ui.base.BaseFragment;
+import com.readeveryday.base.BaseFragment;
 import com.readeveryday.ui.presenter.GankPresenter;
 import com.readeveryday.ui.view.GankFgView;
 

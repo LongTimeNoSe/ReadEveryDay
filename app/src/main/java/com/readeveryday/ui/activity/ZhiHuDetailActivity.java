@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.readeveryday.R;
-import com.readeveryday.ui.base.BaseActivity;
+import com.readeveryday.base.BaseActivity;
 import com.readeveryday.ui.presenter.ZhiHuDetailPresenter;
 import com.readeveryday.ui.view.ZhiHuDetailView;
 import com.readeveryday.utils.StatusBarUtil;

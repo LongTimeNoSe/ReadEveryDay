@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.readeveryday.R;
-import com.readeveryday.ui.base.BaseFragment;
+import com.readeveryday.base.BaseFragment;
 import com.readeveryday.ui.presenter.ZhiHuFgPresenter;
 import com.readeveryday.ui.view.ZhiHuFgView;
 

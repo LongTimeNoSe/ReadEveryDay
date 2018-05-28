@@ -8,7 +8,7 @@ import android.util.Log;
 
 import com.readeveryday.bean.zhihu.NewsTimeLine;
 import com.readeveryday.ui.adapter.ZhiHuAdapter;
-import com.readeveryday.ui.base.BasePresenter;
+import com.readeveryday.base.BasePresenter;
 import com.readeveryday.ui.view.ZhiHuFgView;
 import com.readeveryday.utils.PromptUtil;
 

@@ -1,4 +1,4 @@
-package com.readeveryday.ui.base;
+package com.readeveryday.base;
 
 import android.content.Context;
 import android.content.SharedPreferences;

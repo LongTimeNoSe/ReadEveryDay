@@ -17,9 +17,9 @@ import android.widget.LinearLayout;
 import com.readeveryday.R;
 import com.readeveryday.manager.GreenDaoUserInfoManager;
 import com.readeveryday.ui.adapter.FragmentAdapter;
-import com.readeveryday.ui.base.BaseActivity;
-import com.readeveryday.ui.base.BaseFragment;
-import com.readeveryday.ui.base.BasePresenter;
+import com.readeveryday.base.BaseActivity;
+import com.readeveryday.base.BaseFragment;
+import com.readeveryday.base.BasePresenter;
 import com.readeveryday.ui.fragment.AndroidFragment;
 import com.readeveryday.ui.fragment.MeiZhiFragment;
 import com.readeveryday.ui.fragment.ZhiHuFragment;
@@ -137,6 +137,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //                PromptUtil.snackbarShow(mActivityMain, "退出账号");
                 mSharedPreferences.edit().putString("userName", "").putString("psw", "").putBoolean("isLoging", false).apply();
                 isLoging = false;
+                break;
+            default:
                 break;
 
         }

@@ -3,7 +3,7 @@
     <string name="navigation_drawer_open" translatable="false">navigation_drawer_open</string>
     <string name="navigation_drawer_close" translatable="false">navigation_drawer_close</string>
     <string name="about_read_everyday_introduction" translatable="false">简介：\nReadEveryDay是我参照GeekNews与GankWithZhihu以及其他自己所学习和接触的知识点所练习的一个小小项目。所用知识点包括Retrofit、OkHttp、RxJava、ButterKnife、Glide以及GreenDao等；项目整体样式按照MaterialDesign设计。</string>
-    <string name="about_read_everyday_address" translatable="false">项目地址：\n https://github.com/MissYouAllTheTime/ReadEveryDay</string>
+    <string name="about_read_everyday_address" translatable="false">项目地址：\n https://github.com/LongTimeNoSe/ReadEveryDay</string>
     <string name="share_content" translatable="false">来自ReadEveryDay的一个美丽的分享</string>
     <string name="login">登   录</string>
     <string name="register">注   册</string>

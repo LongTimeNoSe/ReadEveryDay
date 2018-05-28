@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.readeveryday.bean.Android.AndroidList;
 import com.readeveryday.ui.adapter.AndroidListAdapter;
-import com.readeveryday.ui.base.BasePresenter;
+import com.readeveryday.base.BasePresenter;
 import com.readeveryday.ui.view.AndroidView;
 import com.readeveryday.utils.PromptUtil;
 

@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.readeveryday.R;
-import com.readeveryday.ui.base.BaseActivity;
+import com.readeveryday.base.BaseActivity;
 import com.readeveryday.ui.presenter.LoginPresenter;
 import com.readeveryday.ui.view.LoginView;
 import com.readeveryday.utils.StatusBarUtil;

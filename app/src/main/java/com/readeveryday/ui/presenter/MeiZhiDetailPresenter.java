@@ -16,7 +16,7 @@ import com.readeveryday.R;
 import com.readeveryday.greendao.MyCollect;
 import com.readeveryday.greendao.MyCollectDao;
 import com.readeveryday.manager.GreenDaoManager;
-import com.readeveryday.ui.base.BasePresenter;
+import com.readeveryday.base.BasePresenter;
 import com.readeveryday.ui.view.MeiZhiDetailView;
 import com.readeveryday.utils.PromptUtil;
 import com.readeveryday.widget.ArcMenu;

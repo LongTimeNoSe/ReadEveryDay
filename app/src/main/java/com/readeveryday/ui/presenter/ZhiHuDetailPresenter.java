@@ -18,7 +18,7 @@ import com.readeveryday.bean.zhihu.News;
 import com.readeveryday.greendao.MyCollect;
 import com.readeveryday.greendao.MyCollectDao;
 import com.readeveryday.manager.GreenDaoManager;
-import com.readeveryday.ui.base.BasePresenter;
+import com.readeveryday.base.BasePresenter;
 import com.readeveryday.ui.view.ZhiHuDetailView;
 import com.readeveryday.utils.PromptUtil;
 

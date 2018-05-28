@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.readeveryday.R;
 import com.readeveryday.manager.CardLayoutManager;
-import com.readeveryday.ui.base.BaseFragment;
+import com.readeveryday.base.BaseFragment;
 import com.readeveryday.ui.presenter.MeiZhiPresenter;
 import com.readeveryday.ui.view.MeiZhiView;
 

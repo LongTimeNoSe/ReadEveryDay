@@ -10,8 +10,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.readeveryday.R;
-import com.readeveryday.ui.base.BaseActivity;
-import com.readeveryday.ui.base.BasePresenter;
+import com.readeveryday.base.BaseActivity;
+import com.readeveryday.base.BasePresenter;
 import com.readeveryday.utils.StatusBarUtil;
 
 import butterknife.BindView;

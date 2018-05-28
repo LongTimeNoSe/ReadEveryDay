@@ -10,7 +10,7 @@ import com.readeveryday.bean.gank.Gank;
 import com.readeveryday.bean.gank.Meizhi;
 import com.readeveryday.manager.CardLayoutManager;
 import com.readeveryday.ui.adapter.MeiZhiAdapter;
-import com.readeveryday.ui.base.BasePresenter;
+import com.readeveryday.base.BasePresenter;
 import com.readeveryday.ui.view.MeiZhiView;
 import com.readeveryday.utils.CardConfig;
 import com.readeveryday.utils.PromptUtil;

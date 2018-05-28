@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.readeveryday.R;
-import com.readeveryday.ui.base.BaseActivity;
+import com.readeveryday.base.BaseActivity;
 import com.readeveryday.ui.presenter.CollectPresenter;
 import com.readeveryday.ui.view.CollectView;
 import com.readeveryday.utils.PromptUtil;

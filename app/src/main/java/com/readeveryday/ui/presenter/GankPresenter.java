@@ -10,7 +10,7 @@ import com.readeveryday.bean.gank.Gank;
 import com.readeveryday.bean.gank.Meizhi;
 import com.readeveryday.bean.gank.Video;
 import com.readeveryday.ui.adapter.GankAdapter;
-import com.readeveryday.ui.base.BasePresenter;
+import com.readeveryday.base.BasePresenter;
 import com.readeveryday.ui.view.GankFgView;
 import com.readeveryday.utils.DateUtils;
 import com.readeveryday.utils.PromptUtil;
@@ -19,7 +19,6 @@ import java.util.Date;
 import java.util.List;
 
 import rx.Observable;
-import rx.Scheduler;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func2;

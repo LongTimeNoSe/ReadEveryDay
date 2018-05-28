@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.readeveryday.bean.UserInfo;
-import com.readeveryday.ui.base.BasePresenter;
+import com.readeveryday.base.BasePresenter;
 import com.readeveryday.ui.view.LoginView;
 import com.readeveryday.utils.PromptUtil;
 

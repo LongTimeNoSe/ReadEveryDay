@@ -5,8 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 
 import com.readeveryday.R;
-import com.readeveryday.ui.base.BaseActivity;
-import com.readeveryday.ui.base.BasePresenter;
+import com.readeveryday.base.BaseActivity;
+import com.readeveryday.base.BasePresenter;
 
 /**
  * Created by XuYanping on 2017/3/27.

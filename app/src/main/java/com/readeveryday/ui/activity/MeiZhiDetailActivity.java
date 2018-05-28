@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.readeveryday.R;
-import com.readeveryday.ui.base.BaseActivity;
+import com.readeveryday.base.BaseActivity;
 import com.readeveryday.ui.presenter.MeiZhiDetailPresenter;
 import com.readeveryday.ui.view.MeiZhiDetailView;
 import com.readeveryday.utils.StatusBarUtil;
