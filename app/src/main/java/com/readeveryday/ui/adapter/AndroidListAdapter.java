@@ -111,7 +111,10 @@ public class AndroidListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             if (resultsBean.getImages() != null) {
 //                Glide.with(mContext).load(resultsBean.getImages().get(0)).centerCrop().into(mIvImage);
                 //有部分图片为GIF图 显示Gif会消耗很大的内存 此处讲GIF修改未Image
-                Glide.with(mContext).load(resultsBean.getImages().get(0)).asBitmap().centerCrop().into(mIvImage);
+                if (resultsBean.getImages().size() > 0) {
+                    Glide.with(mContext).load(resultsBean.getImages().get(0)).asBitmap().centerCrop().into(mIvImage);
+                }
+
             } else {
                 mIvImage.setVisibility(View.GONE);
             }
